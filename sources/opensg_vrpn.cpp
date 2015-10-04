@@ -4,6 +4,10 @@
 #include <iostream>
 #include <ios>
 
+#include <OpenSG/OSGMaterialGroup.h>
+#include <OpenSG/OSGImage.h>
+#include <OpenSG/OSGSimpleTexturedMaterial.h>
+
 #include <OpenSG/OSGGLUT.h>
 #include <OpenSG/OSGConfig.h>
 #include <OpenSG/OSGSimpleGeometry.h>
@@ -21,11 +25,20 @@
 
 OSG_USING_NAMESPACE
 
+//------------------------------------------------------------------------------
+// ------------------------------ GLOBAL VARIABLES -----------------------------
+//------------------------------------------------------------------------------
 OSGCSM::CAVEConfig cfg;
 OSGCSM::CAVESceneManager *mgr = nullptr;
 vrpn_Tracker_Remote* tracker =  nullptr;
 vrpn_Button_Remote* button = nullptr;
 vrpn_Analog_Remote* analog = nullptr;
+
+// Trasformable Objects
+NodeRecPtr cubeTransNode;
+NodeRecPtr torusTransNode;
+NodeRecPtr earthTransNode;
+
 
 void cleanup()
 {
@@ -37,11 +50,131 @@ void cleanup()
 
 void print_tracker();
 
+/// -------------------------------------------------------------------------------------------------------
+/// ------------------------------------------- BUILD SCENE -----------------------------------------------
+/// -------------------------------------------------------------------------------------------------------
 NodeTransitPtr buildScene()
 {
-	// you will see a donut at the floor, slightly skewed, depending on head_position
-	return makeTorus(10.f, 50.f, 32.f, 64.f);
+	// ---------------------------------------- SETUP ROOT ------------------------------------------------
+
+	NodeRecPtr root = Node::create();
+	root->setCore(Group::create());
+
+	// ----------------------------------------------------------------------------------------------------
+
+	// --------------------------------------- CREATE OBJECTS ---------------------------------------------
+
+	// Insert Test Torus
+	NodeRecPtr testTorus = makeTorus(5.f, 10.f, 32.f, 64.f);
+	root->addChild(testTorus);
+
+	// Insert Cube
+	NodeRecPtr testCube = makeBox(30,30,30,10,10,10);
+	root->addChild(testCube);
+
+	//decouple the nodes to be shifted in hierarchy from the scene
+	root->subChild(testTorus);
+	root->subChild(testCube);
+
+	// ----------------------------------------------------------------------------------------------------
+
+	// ------------------------------------- TRANSFORMATION SETUP -----------------------------------------
+	
+	// TORUS
+	TransformRecPtr torusTransCore = Transform::create();
+	Matrix torusMatrix;
+
+	// CUBE
+	TransformRecPtr cubeTransCore = Transform::create();
+	Matrix cubeMatrix;
+
+	// ----------------------------------------------------------------------------------------------------
+
+	// ---------------------------------------- MATRIX SETUP ----------------------------------------------
+
+	// TORUS
+	torusMatrix.setIdentity();
+	torusMatrix.setTranslate(0,40,0);
+	torusTransCore->setMatrix(torusMatrix);
+
+	// CUBE
+	cubeMatrix.setIdentity();
+	cubeMatrix.setTranslate(0,20,0);
+	cubeTransCore->setMatrix(cubeMatrix);
+
+	// ----------------------------------------------------------------------------------------------------
+	
+	// ----------------------------------------- NODE SETUP -----------------------------------------------
+
+	// TORUS
+	torusTransNode = makeNodeFor(torusTransCore);
+	torusTransNode->addChild(testTorus);
+
+	// CUBE
+	cubeTransNode = makeNodeFor(cubeTransCore);
+	cubeTransNode->addChild(testCube);
+
+	// ----------------------------------------------------------------------------------------------------
+
+	// ------------------------------------------ TRANSFORM -----------------------------------------------
+
+	// TORUS
+	ComponentTransformRecPtr torusTrans = ComponentTransform::create();
+	torusTrans->setTranslation(Vec3f(-10.f,100.f,0.f));
+	torusTrans->setRotation(Quaternion(Vec3f(1.f,0.f,0.f),osgDegree2Rad(90)));
+
+	torusTransNode = Node::create();
+	torusTransNode->setCore(torusTrans);
+	torusTransNode->addChild(testTorus);
+
+	// CUBE
+	ComponentTransformRecPtr cubeTrans = ComponentTransform::create();
+	cubeTrans->setTranslation(Vec3f(10.f,40.f,-40.f));
+	cubeTrans->setRotation(Quaternion(Vec3f(1.f,0.f,0.f),osgDegree2Rad(90)));
+
+	cubeTransNode = Node::create();
+	cubeTransNode->setCore(cubeTrans);
+	cubeTransNode->addChild(testCube);
+
+	// -------------------------------------------- COLOR -------------------------------------------------
+
+	//// MAKE EARTH BLUE
+	//SimpleMaterialRecPtr boxMat = SimpleMaterial::create();
+
+	//boxMat->setDiffuse(Color3f(0,0.6f,0.6f));
+	//boxMat->setAmbient(Color3f(0, 0.4f, 0.4f));
+	//// boxMat->setTransparency(0.25);
+	////boxMat->setLit(false);
+
+	//GeometryRecPtr boxGeo = dynamic_cast<Geometry*>(earth->getCore());
+	//boxGeo->setMaterial(boxMat);
+
+	// ----------------------------------------------------------------------------------------------------
+
+	// ADD NODES TO SCENE
+	root->addChild(torusTransNode);
+	root->addChild(cubeTransNode);
+
+	// ----------------------------------------------------------------------------------------------------
+
+	// ADD EARTH MODEL 
+	NodeRecPtr earth = SceneFileHandler::the()->read("models/moon.3DS");
+
+	ComponentTransformRecPtr earthTrans = ComponentTransform::create();
+	//earthTrans->setTranslation(Vec3f(1000.f,1000.f,-3000.f));
+	earthTrans->setTranslation(Vec3f(1000.f,1000.f,-3000.f));
+	earthTrans->setRotation(Quaternion(Vec3f(0,1,0),osgDegree2Rad(0)));
+	earthTrans->setScale(Vec3f(5.f,5.f,5.f));
+
+	earthTransNode = makeNodeFor(earthTrans);
+	earthTransNode->addChild(earth);
+
+	root->addChild(earthTransNode);
+	
+	return NodeTransitPtr(root);
 }
+
+
 
 template<typename T>
 T scale_tracker2cm(const T& value)
@@ -117,6 +250,31 @@ void print_tracker()
 	std::cout << "Analog: " << analog_values << '\n';
 }
 
+void objectMotion()
+{
+	const float speed = 1000.f * std::clock() / CLOCKS_PER_SEC;
+
+	// Transform Cube
+	ComponentTransformRecPtr cubeDynTrans = dynamic_cast<ComponentTransform*>(cubeTransNode->getCore());
+	cubeDynTrans->setRotation(Quaternion(Vec3f(0,1,0), osgDegree2Rad(270) + 0.001f * speed));
+	
+	// Transform Torus
+	ComponentTransformRecPtr torusDynTrans = dynamic_cast<ComponentTransform*>(torusTransNode->getCore());
+	torusDynTrans->setRotation(Quaternion(Vec3f(1,0,0), osgDegree2Rad(270) + 0.001f * speed));
+
+	// Transform Earth
+	ComponentTransformRecPtr earthDynTrans = dynamic_cast<ComponentTransform*>(earthTransNode->getCore());
+	earthDynTrans->setRotation(Quaternion(Vec3f(0,1,0), osgDegree2Rad(30) + 0.0001f * speed));
+
+	// EXAMPLES:
+	//bt->setTranslation(Vec3f(10,5,0));
+	//bt->setScale(Vec3f(0.001,0.001,0.001));
+
+	//updateMesh(time);
+
+	// -------------------------------------------------------------------------------------------
+}
+
 void keyboard(unsigned char k, int x, int y)
 {
 	Real32 ed;
@@ -149,34 +307,62 @@ void keyboard(unsigned char k, int x, int y)
 	}
 }
 
+void reshape(int w, int h)
+{
+	mgr->resize(w, h);
+	glutPostRedisplay();
+}
+
+
+
+void display(void)
+{
+	// transform the objects
+	objectMotion();
+
+	commitChanges();
+	mgr->redraw();
+
+	//the changelist should be cleared - else things
+	//could be copied multiple times
+	OSG::Thread::getCurrentChangeList()->clear();
+
+	// to ensure a black navigation window
+	glClear(GL_COLOR_BUFFER_BIT);
+	glutSwapBuffers();
+}
+
+void idle(void)
+{
+	check_tracker();
+	const auto speed = 1.f;
+	mgr->setUserTransform(head_position, head_orientation);
+	mgr->setTranslation(mgr->getTranslation() + speed * analog_values);
+	
+	// transform the objects
+	objectMotion();
+
+	commitChanges();
+	mgr->redraw();
+	// the changelist should be cleared - else things could be copied multiple times
+	OSG::Thread::getCurrentChangeList()->clear();
+}
+
+
+
 void setupGLUT(int *argc, char *argv[])
 {
 	glutInit(argc, argv);
 	glutInitDisplayMode(GLUT_RGB  |GLUT_DEPTH | GLUT_DOUBLE);
 	glutCreateWindow("OpenSG CSMDemo with VRPN API");
-	glutDisplayFunc([]()
-	{
-		// black navigation window
-		glClear(GL_COLOR_BUFFER_BIT);
-		glutSwapBuffers();
-	});
-	glutReshapeFunc([](int w, int h)
-	{
-		mgr->resize(w, h);
-		glutPostRedisplay();
-	});
+	
+	// ---------------------------------------   DISPLAY   -------------------------------------------
+	glutDisplayFunc(display);
+	// ---------------------------------------   RESHAPE   -------------------------------------------
+	glutReshapeFunc(reshape);
 	glutKeyboardFunc(keyboard);
-	glutIdleFunc([]()
-	{
-		check_tracker();
-		const auto speed = 1.f;
-		mgr->setUserTransform(head_position, head_orientation);
-		mgr->setTranslation(mgr->getTranslation() + speed * analog_values);
-		commitChanges();
-		mgr->redraw();
-		// the changelist should be cleared - else things could be copied multiple times
-		OSG::Thread::getCurrentChangeList()->clear();
-	});
+	// ----------------------------------------   IDLE   ---------------------------------------------
+	glutIdleFunc(idle);
 }
 
 int main(int argc, char **argv)
@@ -249,6 +435,27 @@ int main(int argc, char **argv)
 		mgr->setWindow(mwin );
 		mgr->setRoot(scene);
 		mgr->showAll();
+
+		// ------------------------------------ BACKGROUND --------------------------------------- 
+
+		ImageRecPtr backimage = Image::create();
+		backimage->read("models/universe1.jpg");
+
+		TextureObjChunkRecPtr bkgTex = TextureObjChunk::create();
+		bkgTex->setImage(backimage);
+		bkgTex->setScale(false);
+		TextureBackgroundRecPtr imBkg = TextureBackground::create();
+		imBkg->setTexture(bkgTex);
+		imBkg->setColor(Color4f(1.0,1.0,1.0,0.0f));
+
+		// alternatively use a gradient background
+		//GradientBackgroundRecPtr bkg = GradientBackground::create();
+		//bkg->addLine(Color3f(0.7f, 0.7f, 0.8f), 0);
+		//bkg->addLine(Color3f(0.0f, 0.1f, 0.3f), 1);
+
+		mwin->getPort(0)->setBackground(imBkg);
+		// ----------------------------------------------------------------------------------------
+
 		mgr->getWindow()->init();
 		mgr->turnWandOff();
 	}
@@ -260,3 +467,4 @@ int main(int argc, char **argv)
 
 	glutMainLoop();
 }
+
