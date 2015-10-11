@@ -1,0 +1,2 @@
+moonmap2.jpg is texture for moon
+1_earth_.jpg is texture for earth
