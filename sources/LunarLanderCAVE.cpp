@@ -4,6 +4,7 @@
 #include <iostream>
 #include <ios>
 #include <list>
+#include <chrono>
 
 #include <OpenSG/OSGMaterialGroup.h>
 #include <OpenSG/OSGImage.h>
@@ -37,9 +38,11 @@ vrpn_Tracker_Remote* tracker =  nullptr;
 vrpn_Button_Remote* button = nullptr;
 vrpn_Analog_Remote* analog = nullptr;
 
+//Skybox skybox;                        // scene surroundings
+
 // MOVEMENT VALUES
 const float BOOST_VALUE = 5.0f;
-const float GRAVITY_PULL = 0.04f;
+const float GRAVITY_PULL = 5e-10;
 const float VELOCITY_THRESHOLD = 1.f;
 const int FUEL_AMOUNT = 10;
 int boostTest = 0;
@@ -49,14 +52,17 @@ CollidingObject playerCollider = CollidingObject("Player", Vec3f(0.f,0.f,0.f), 2
 
 auto userMovement = Vec3f(0.f, 0.f, 0.f);
 
+// Start time for boost 
+auto boostStartTime = std::chrono::high_resolution_clock::now();
+
 // the last measured time - for differnce 
-auto startTime = std::clock();
+auto startTime = std::chrono::high_resolution_clock::now();
 
 // The current time
-auto currentTime = std::clock();
+auto currentTime = std::chrono::high_resolution_clock::now();
 
 // player speed - manipulated by gravity and boost
-float currentVelocity = 1.f;
+float currentVelocity = 0.f;
 
 // current height above moon surface
 float hight = 100.f;
@@ -65,6 +71,7 @@ float hight = 100.f;
 int fuel = 100;
 
 // OBJECTS
+float objectRotationValue = 0.f;
 std::list<CollidingObject> objectList; 
 
 // Trasformable Objects
@@ -127,12 +134,12 @@ NodeTransitPtr buildScene()
 
 	// TORUS
 	torusMatrix.setIdentity();
-	torusMatrix.setTranslate(0,40,0);
+	torusMatrix.setTranslate(0,400,0);
 	torusTransCore->setMatrix(torusMatrix);
 
 	// CUBE
 	cubeMatrix.setIdentity();
-	cubeMatrix.setTranslate(0,20,0);
+	cubeMatrix.setTranslate(0,200,0);
 	cubeTransCore->setMatrix(cubeMatrix);
 
 	// ----------------------------------------------------------------------------------------------------
@@ -181,18 +188,39 @@ NodeTransitPtr buildScene()
 	ComponentTransformRecPtr earthTrans = ComponentTransform::create();
 	//earthTrans->setTranslation(Vec3f(1000.f,1000.f,-3000.f));
 	earthTrans->setTranslation(Vec3f(100000.f,100000.f,-385000.f));
-	earthTrans->setRotation(Quaternion(Vec3f(1,1,1),3.14));
 	earthTrans->setScale(Vec3f(1000.f,1000.f,1000.f));
-
+	
 	earthTransNode = makeNodeFor(earthTrans);
 	earthTransNode->addChild(earth);
 
 	root->addChild(earthTransNode);
+
+	// SKYBOX
+	/*std::string skyPath = Configuration::getPath("Skybox");
+	skybox.init(5,5,5, 1000, (skyPath+"lostatseaday/lostatseaday_dn.jpg").c_str(),
+		(skyPath+"lostatseaday/lostatseaday_up.jpg").c_str(),
+		(skyPath+"lostatseaday/lostatseaday_ft.jpg").c_str(),
+		(skyPath+"lostatseaday/lostatseaday_bk.jpg").c_str(),
+		(skyPath+"lostatseaday/lostatseaday_rt.jpg").c_str(),
+		(skyPath+"lostatseaday/lostatseaday_lf.jpg").c_str());
+		
+	root->addChild(skybox.getNodePtr());*/
 	
 	return NodeTransitPtr(root);
 }
 
+void activateBoost(void)
+{
+	auto boostCurrentTime = std::chrono::high_resolution_clock::now();
+	
+	if( (boostCurrentTime - boostStartTime).count() > 1)
+	{
+		currentVelocity += BOOST_VALUE;
+		fuel -= 5;
+		boostStartTime = boostCurrentTime;
+	}
 
+}
 
 template<typename T>
 T scale_tracker2cm(const T& value)
@@ -228,7 +256,9 @@ void VRPN_CALLBACK callback_analog(void* userData, const vrpn_ANALOGCB analog)
 void VRPN_CALLBACK callback_button(void* userData, const vrpn_BUTTONCB button)
 {
 	if (button.button == 0 && button.state == 1)
-		print_tracker();
+	{
+		activateBoost();
+	}
 }
 
 void InitTracker(OSGCSM::CAVEConfig &cfg)
@@ -270,19 +300,19 @@ void print_tracker()
 
 void objectMotion()
 {
-	const float speed = 1000.f * std::clock() / CLOCKS_PER_SEC;
+	objectRotationValue += 0.001f;
 
 	// Transform Cube
 	ComponentTransformRecPtr cubeDynTrans = dynamic_cast<ComponentTransform*>(cubeTransNode->getCore());
-	cubeDynTrans->setRotation(Quaternion(Vec3f(0,1,0), osgDegree2Rad(270) + 0.001f * speed));
+	cubeDynTrans->setRotation(Quaternion(Vec3f(1,0,0), osgDegree2Rad(90) + objectRotationValue));
 	
 	// Transform Torus
 	ComponentTransformRecPtr torusDynTrans = dynamic_cast<ComponentTransform*>(torusTransNode->getCore());
-	torusDynTrans->setRotation(Quaternion(Vec3f(1,0,0), osgDegree2Rad(270) + 0.001f * speed));
+	torusDynTrans->setRotation(Quaternion(Vec3f(1,0,0), osgDegree2Rad(90) + objectRotationValue));
 
 	// Transform Earth
 	ComponentTransformRecPtr earthDynTrans = dynamic_cast<ComponentTransform*>(earthTransNode->getCore());
-	earthDynTrans->setRotation(Quaternion(Vec3f(0,1,0), osgDegree2Rad(30) + 0.0001f * speed));
+	earthDynTrans->setRotation(Quaternion(Vec3f(0,1,0), osgDegree2Rad(90) + objectRotationValue));
 
 	// EXAMPLES:
 	//bt->setTranslation(Vec3f(10,5,0));
@@ -333,10 +363,11 @@ void reshape(int w, int h)
 
 void display(void)
 {
-	// transform the objects
-	objectMotion();
-
 	commitChanges();
+	
+	//skybox.setupRender(camera->getPosition()); // attach the SkyBox to the camera
+	//skybox.setupRender(activeCamera->getPosition()); // attach the SkyBox to the camera
+
 	mgr->redraw();
 
 	//the changelist should be cleared - else things
@@ -392,40 +423,37 @@ void checkCollision(void)
 }
 
 
-// GAME LOOP
+// GAME LOOP - Every frame
 void update(void)
 {
 	// Get current time
-	auto currentTime = std::clock();
+    currentTime = std::chrono::high_resolution_clock::now();
 	
-	// Update every 41 ms
-	int updateFrequency = 41;
-	
-	// Boost Test
-	// variable at Global
+	// std::chrono::duration<double> difference = currentTime - startTime;
+	auto difference = currentTime - startTime;
 
-	// if time difference is greater than frequency, apply update
-	if(currentTime - startTime > updateFrequency)
+	// Test Output
+	std::cout << "Velocity: " << std::setprecision(2) << currentVelocity << "\t" << "Boost: " << boostTest << "\n";
+	std::cout << "Differenz:" << difference.count() << "\n";
+
+	// Calculate Gravity and apply to velocity
+    currentVelocity -= GRAVITY_PULL * difference.count();
+	startTime = currentTime;
+
+	// TEST BOOST - Upward force, one time. Reset current Velocity to 0
+	/*boostTest++;
+	if(boostTest > 100)
 	{
-		std::cout << "Velocity: " << std::setprecision(2) << currentVelocity << "\t" << "Boost: " << boostTest << "\n";
-		currentVelocity -= GRAVITY_PULL;
-		startTime = currentTime;
-
-		// TEST BOOST - Upward force, one time. Reset current Velocity to 0
-		boostTest++;
-		if(boostTest > 100)
-		{
-			currentVelocity += BOOST_VALUE;
-			fuel -= 5;
-			boostTest = 0;
-		}
+		currentVelocity += BOOST_VALUE;
+		fuel -= 5;
+		boostTest = 0;
+	}*/
 		
-		// APPLY FORCES
-		userMovement += Vec3f(0.f ,currentVelocity, 0.f);
+	// APPLY FORCES
+	userMovement += Vec3f(0.f ,currentVelocity, 0.f);
 
-		// Check for collision
-		checkCollision();
-	}
+	// Check for collision
+	checkCollision();
 
 	
 }
@@ -549,7 +577,7 @@ int main(int argc, char **argv)
 		// ------------------------------------ BACKGROUND --------------------------------------- 
 
 		ImageRecPtr backimage = Image::create();
-		backimage->read("models/universe1.jpg");
+		backimage->read("models/universe2.jpg");
 
 		TextureObjChunkRecPtr bkgTex = TextureObjChunk::create();
 		bkgTex->setImage(backimage);
@@ -564,6 +592,11 @@ int main(int argc, char **argv)
 		//bkg->addLine(Color3f(0.0f, 0.1f, 0.3f), 1);
 
 		mwin->getPort(0)->setBackground(imBkg);
+		/*mwin->getPort(1)->setBackground(imBkg);
+		mwin->getPort(2)->setBackground(imBkg);
+		mwin->getPort(3)->setBackground(imBkg);
+		mwin->getPort(4)->setBackground(imBkg);
+		mwin->getPort(5)->setBackground(imBkg);*/
 		// ----------------------------------------------------------------------------------------
 
 		mgr->getWindow()->init();
