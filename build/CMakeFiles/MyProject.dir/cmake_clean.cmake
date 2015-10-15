@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/MyProject.dir/sources/opensg_vrpn.cpp.o"
+  "CMakeFiles/MyProject.dir/sources/LunarLanderCAVE.cpp.o"
+  "CMakeFiles/MyProject.dir/sources/collidingObject.cpp.o"
   "../exe/MyProject.pdb"
   "../exe/MyProject"
 )

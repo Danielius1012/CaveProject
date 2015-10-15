@@ -42,10 +42,10 @@ RM = /sw/cmake/3.2.3/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ga78ced/student_project
+CMAKE_SOURCE_DIR = /home/ga78ced/student_project/CaveProject
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ga78ced/student_project/build
+CMAKE_BINARY_DIR = /home/ga78ced/student_project/CaveProject/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -72,9 +72,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ga78ced/student_project/build/CMakeFiles /home/ga78ced/student_project/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ga78ced/student_project/CaveProject/build/CMakeFiles /home/ga78ced/student_project/CaveProject/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ga78ced/student_project/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ga78ced/student_project/CaveProject/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -114,29 +114,53 @@ MyProject/fast:
 	$(MAKE) -f CMakeFiles/MyProject.dir/build.make CMakeFiles/MyProject.dir/build
 .PHONY : MyProject/fast
 
-sources/opensg_vrpn.o: sources/opensg_vrpn.cpp.o
-.PHONY : sources/opensg_vrpn.o
+sources/LunarLanderCAVE.o: sources/LunarLanderCAVE.cpp.o
+.PHONY : sources/LunarLanderCAVE.o
 
 # target to build an object file
-sources/opensg_vrpn.cpp.o:
-	$(MAKE) -f CMakeFiles/MyProject.dir/build.make CMakeFiles/MyProject.dir/sources/opensg_vrpn.cpp.o
-.PHONY : sources/opensg_vrpn.cpp.o
+sources/LunarLanderCAVE.cpp.o:
+	$(MAKE) -f CMakeFiles/MyProject.dir/build.make CMakeFiles/MyProject.dir/sources/LunarLanderCAVE.cpp.o
+.PHONY : sources/LunarLanderCAVE.cpp.o
 
-sources/opensg_vrpn.i: sources/opensg_vrpn.cpp.i
-.PHONY : sources/opensg_vrpn.i
+sources/LunarLanderCAVE.i: sources/LunarLanderCAVE.cpp.i
+.PHONY : sources/LunarLanderCAVE.i
 
 # target to preprocess a source file
-sources/opensg_vrpn.cpp.i:
-	$(MAKE) -f CMakeFiles/MyProject.dir/build.make CMakeFiles/MyProject.dir/sources/opensg_vrpn.cpp.i
-.PHONY : sources/opensg_vrpn.cpp.i
+sources/LunarLanderCAVE.cpp.i:
+	$(MAKE) -f CMakeFiles/MyProject.dir/build.make CMakeFiles/MyProject.dir/sources/LunarLanderCAVE.cpp.i
+.PHONY : sources/LunarLanderCAVE.cpp.i
 
-sources/opensg_vrpn.s: sources/opensg_vrpn.cpp.s
-.PHONY : sources/opensg_vrpn.s
+sources/LunarLanderCAVE.s: sources/LunarLanderCAVE.cpp.s
+.PHONY : sources/LunarLanderCAVE.s
 
 # target to generate assembly for a file
-sources/opensg_vrpn.cpp.s:
-	$(MAKE) -f CMakeFiles/MyProject.dir/build.make CMakeFiles/MyProject.dir/sources/opensg_vrpn.cpp.s
-.PHONY : sources/opensg_vrpn.cpp.s
+sources/LunarLanderCAVE.cpp.s:
+	$(MAKE) -f CMakeFiles/MyProject.dir/build.make CMakeFiles/MyProject.dir/sources/LunarLanderCAVE.cpp.s
+.PHONY : sources/LunarLanderCAVE.cpp.s
+
+sources/collidingObject.o: sources/collidingObject.cpp.o
+.PHONY : sources/collidingObject.o
+
+# target to build an object file
+sources/collidingObject.cpp.o:
+	$(MAKE) -f CMakeFiles/MyProject.dir/build.make CMakeFiles/MyProject.dir/sources/collidingObject.cpp.o
+.PHONY : sources/collidingObject.cpp.o
+
+sources/collidingObject.i: sources/collidingObject.cpp.i
+.PHONY : sources/collidingObject.i
+
+# target to preprocess a source file
+sources/collidingObject.cpp.i:
+	$(MAKE) -f CMakeFiles/MyProject.dir/build.make CMakeFiles/MyProject.dir/sources/collidingObject.cpp.i
+.PHONY : sources/collidingObject.cpp.i
+
+sources/collidingObject.s: sources/collidingObject.cpp.s
+.PHONY : sources/collidingObject.s
+
+# target to generate assembly for a file
+sources/collidingObject.cpp.s:
+	$(MAKE) -f CMakeFiles/MyProject.dir/build.make CMakeFiles/MyProject.dir/sources/collidingObject.cpp.s
+.PHONY : sources/collidingObject.cpp.s
 
 # Help Target
 help:
@@ -147,9 +171,12 @@ help:
 	@echo "... MyProject"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... sources/opensg_vrpn.o"
-	@echo "... sources/opensg_vrpn.i"
-	@echo "... sources/opensg_vrpn.s"
+	@echo "... sources/LunarLanderCAVE.o"
+	@echo "... sources/LunarLanderCAVE.i"
+	@echo "... sources/LunarLanderCAVE.s"
+	@echo "... sources/collidingObject.o"
+	@echo "... sources/collidingObject.i"
+	@echo "... sources/collidingObject.s"
 .PHONY : help
 
 

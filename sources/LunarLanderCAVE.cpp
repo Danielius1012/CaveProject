@@ -41,10 +41,10 @@ vrpn_Analog_Remote* analog = nullptr;
 //Skybox skybox;                        // scene surroundings
 
 // MOVEMENT VALUES
-const float BOOST_VALUE = 5.0f;
-const float GRAVITY_PULL = 5e-10;
+const float BOOST_VALUE = .1f;
+const float GRAVITY_PULL = 2e-11;
 const float VELOCITY_THRESHOLD = 1.f;
-const int FUEL_AMOUNT = 10;
+const int FUEL_AMOUNT = 100;
 int boostTest = 0;
 
 // USER
@@ -68,7 +68,7 @@ float currentVelocity = 0.f;
 float hight = 100.f;
 
 // The user starts with 100 units of fuel - every boost burns 10 units
-int fuel = 100;
+int fuel = FUEL_AMOUNT;
 
 // OBJECTS
 float objectRotationValue = 0.f;
@@ -134,12 +134,12 @@ NodeTransitPtr buildScene()
 
 	// TORUS
 	torusMatrix.setIdentity();
-	torusMatrix.setTranslate(0,400,0);
+        torusMatrix.setTranslate(0,40,50);
 	torusTransCore->setMatrix(torusMatrix);
 
 	// CUBE
 	cubeMatrix.setIdentity();
-	cubeMatrix.setTranslate(0,200,0);
+        cubeMatrix.setTranslate(0,20,50);
 	cubeTransCore->setMatrix(cubeMatrix);
 
 	// ----------------------------------------------------------------------------------------------------
@@ -215,9 +215,13 @@ void activateBoost(void)
 	
 	if( (boostCurrentTime - boostStartTime).count() > 1)
 	{
-		currentVelocity += BOOST_VALUE;
-		fuel -= 5;
-		boostStartTime = boostCurrentTime;
+            if(fuel > 0)
+            {
+                currentVelocity += BOOST_VALUE;
+                fuel -= 5;
+                boostStartTime = boostCurrentTime;
+            }
+
 	}
 
 }
@@ -304,16 +308,20 @@ void objectMotion()
 
 	// Transform Cube
 	ComponentTransformRecPtr cubeDynTrans = dynamic_cast<ComponentTransform*>(cubeTransNode->getCore());
-	cubeDynTrans->setRotation(Quaternion(Vec3f(1,0,0), osgDegree2Rad(90) + objectRotationValue));
+        //cubeDynTrans->setRotation(Quaternion(Vec3f(1,0,0), osgDegree2Rad(90) + objectRotationValue));
 	
 	// Transform Torus
 	ComponentTransformRecPtr torusDynTrans = dynamic_cast<ComponentTransform*>(torusTransNode->getCore());
-	torusDynTrans->setRotation(Quaternion(Vec3f(1,0,0), osgDegree2Rad(90) + objectRotationValue));
+        //torusDynTrans->setRotation(Quaternion(Vec3f(1,0,0), osgDegree2Rad(90) + objectRotationValue));
 
-	// Transform Earth
+      // Rotate Earth
 	ComponentTransformRecPtr earthDynTrans = dynamic_cast<ComponentTransform*>(earthTransNode->getCore());
-	earthDynTrans->setRotation(Quaternion(Vec3f(0,1,0), osgDegree2Rad(90) + objectRotationValue));
 
+      earthDynTrans->setRotation(Quaternion(Vec3f(0,1,0), osgDegree2Rad(90) + objectRotationValue));
+      earthDynTrans->setTranslation(Vec3f(100000.f,userMovement.y(),-385000.f));
+
+      std::cout << "User: " << userMovement << "\n";
+      std::cout << "Erde: " << earthDynTrans->getTranslation() << "\n";
 	// EXAMPLES:
 	//bt->setTranslation(Vec3f(10,5,0));
 	//bt->setScale(Vec3f(0.001,0.001,0.001));
@@ -427,7 +435,7 @@ void checkCollision(void)
 void update(void)
 {
 	// Get current time
-    currentTime = std::chrono::high_resolution_clock::now();
+      currentTime = std::chrono::high_resolution_clock::now();
 	
 	// std::chrono::duration<double> difference = currentTime - startTime;
 	auto difference = currentTime - startTime;
@@ -437,7 +445,7 @@ void update(void)
 	std::cout << "Differenz:" << difference.count() << "\n";
 
 	// Calculate Gravity and apply to velocity
-    currentVelocity -= GRAVITY_PULL * difference.count();
+        currentVelocity -= GRAVITY_PULL * difference.count();
 	startTime = currentTime;
 
 	// TEST BOOST - Upward force, one time. Reset current Velocity to 0
@@ -451,6 +459,9 @@ void update(void)
 		
 	// APPLY FORCES
 	userMovement += Vec3f(0.f ,currentVelocity, 0.f);
+
+      // transform the objects
+        objectMotion();
 
 	// Check for collision
 	checkCollision();
@@ -468,9 +479,7 @@ void idle(void)
 	// TRANSFORM AND TRANSLATE
 	mgr->setUserTransform(head_position + userMovement, head_orientation);
 	mgr->setTranslation(mgr->getTranslation() + speed * analog_values);
-	
-	// transform the objects
-	objectMotion();
+
 
 	commitChanges();
 	mgr->redraw();
@@ -592,11 +601,16 @@ int main(int argc, char **argv)
 		//bkg->addLine(Color3f(0.0f, 0.1f, 0.3f), 1);
 
 		mwin->getPort(0)->setBackground(imBkg);
-		/*mwin->getPort(1)->setBackground(imBkg);
-		mwin->getPort(2)->setBackground(imBkg);
-		mwin->getPort(3)->setBackground(imBkg);
-		mwin->getPort(4)->setBackground(imBkg);
-		mwin->getPort(5)->setBackground(imBkg);*/
+                mwin->getPort(1)->setBackground(imBkg);
+                mwin->getPort(2)->setBackground(imBkg);
+                mwin->getPort(3)->setBackground(imBkg);
+                mwin->getPort(4)->setBackground(imBkg);
+                mwin->getPort(5)->setBackground(imBkg);
+                mwin->getPort(6)->setBackground(imBkg);
+                mwin->getPort(7)->setBackground(imBkg);
+                mwin->getPort(8)->setBackground(imBkg);
+                mwin->getPort(9)->setBackground(imBkg);
+                mwin->getPort(10)->setBackground(imBkg);
 		// ----------------------------------------------------------------------------------------
 
 		mgr->getWindow()->init();

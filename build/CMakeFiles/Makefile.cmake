@@ -15,6 +15,10 @@ set(CMAKE_MAKEFILE_DEPENDS
   "../cmake/Modules/FindOpenSG.cmake"
   "../cmake/Modules/FindVRPN.cmake"
   "../config/mono.csm"
+  "../includes/EffectTextureManager.h"
+  "../includes/Skybox.h"
+  "../includes/collidingObject.h"
+  "../includes/irrXML.h"
   "/sw-5.1.0/invrs/1.0alpha5/rev2647/lib/cmake/CAVESceneManager/CAVESceneManagerConfig.cmake"
   "/sw-5.1.0/invrs/1.0alpha5/rev2647/lib/cmake/CAVESceneManager/CAVESceneManagerConfigVersion.cmake"
   "/sw-5.1.0/invrs/1.0alpha5/rev2647/lib/cmake/CAVESceneManager/CAVESceneManagerTargets-debug.cmake"
@@ -49,6 +53,10 @@ set(CMAKE_MAKEFILE_OUTPUTS
 
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
+  "includes/EffectTextureManager.h"
+  "includes/Skybox.h"
+  "includes/collidingObject.h"
+  "includes/irrXML.h"
   "config/mono.csm"
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   )

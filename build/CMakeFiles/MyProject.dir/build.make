@@ -35,10 +35,10 @@ RM = /sw/cmake/3.2.3/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ga78ced/student_project
+CMAKE_SOURCE_DIR = /home/ga78ced/student_project/CaveProject
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ga78ced/student_project/build
+CMAKE_BINARY_DIR = /home/ga78ced/student_project/CaveProject/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/MyProject.dir/depend.make
@@ -49,37 +49,62 @@ include CMakeFiles/MyProject.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/MyProject.dir/flags.make
 
-CMakeFiles/MyProject.dir/sources/opensg_vrpn.cpp.o: CMakeFiles/MyProject.dir/flags.make
-CMakeFiles/MyProject.dir/sources/opensg_vrpn.cpp.o: ../sources/opensg_vrpn.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/ga78ced/student_project/build/CMakeFiles $(CMAKE_PROGRESS_1)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/MyProject.dir/sources/opensg_vrpn.cpp.o"
-	/lrz/sys/compilers/gcc/5.1.0/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/MyProject.dir/sources/opensg_vrpn.cpp.o -c /home/ga78ced/student_project/sources/opensg_vrpn.cpp
+CMakeFiles/MyProject.dir/sources/LunarLanderCAVE.cpp.o: CMakeFiles/MyProject.dir/flags.make
+CMakeFiles/MyProject.dir/sources/LunarLanderCAVE.cpp.o: ../sources/LunarLanderCAVE.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/ga78ced/student_project/CaveProject/build/CMakeFiles $(CMAKE_PROGRESS_1)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/MyProject.dir/sources/LunarLanderCAVE.cpp.o"
+	/lrz/sys/compilers/gcc/5.1.0/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/MyProject.dir/sources/LunarLanderCAVE.cpp.o -c /home/ga78ced/student_project/CaveProject/sources/LunarLanderCAVE.cpp
 
-CMakeFiles/MyProject.dir/sources/opensg_vrpn.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MyProject.dir/sources/opensg_vrpn.cpp.i"
-	/lrz/sys/compilers/gcc/5.1.0/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/ga78ced/student_project/sources/opensg_vrpn.cpp > CMakeFiles/MyProject.dir/sources/opensg_vrpn.cpp.i
+CMakeFiles/MyProject.dir/sources/LunarLanderCAVE.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MyProject.dir/sources/LunarLanderCAVE.cpp.i"
+	/lrz/sys/compilers/gcc/5.1.0/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/ga78ced/student_project/CaveProject/sources/LunarLanderCAVE.cpp > CMakeFiles/MyProject.dir/sources/LunarLanderCAVE.cpp.i
 
-CMakeFiles/MyProject.dir/sources/opensg_vrpn.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MyProject.dir/sources/opensg_vrpn.cpp.s"
-	/lrz/sys/compilers/gcc/5.1.0/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/ga78ced/student_project/sources/opensg_vrpn.cpp -o CMakeFiles/MyProject.dir/sources/opensg_vrpn.cpp.s
+CMakeFiles/MyProject.dir/sources/LunarLanderCAVE.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MyProject.dir/sources/LunarLanderCAVE.cpp.s"
+	/lrz/sys/compilers/gcc/5.1.0/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/ga78ced/student_project/CaveProject/sources/LunarLanderCAVE.cpp -o CMakeFiles/MyProject.dir/sources/LunarLanderCAVE.cpp.s
 
-CMakeFiles/MyProject.dir/sources/opensg_vrpn.cpp.o.requires:
-.PHONY : CMakeFiles/MyProject.dir/sources/opensg_vrpn.cpp.o.requires
+CMakeFiles/MyProject.dir/sources/LunarLanderCAVE.cpp.o.requires:
+.PHONY : CMakeFiles/MyProject.dir/sources/LunarLanderCAVE.cpp.o.requires
 
-CMakeFiles/MyProject.dir/sources/opensg_vrpn.cpp.o.provides: CMakeFiles/MyProject.dir/sources/opensg_vrpn.cpp.o.requires
-	$(MAKE) -f CMakeFiles/MyProject.dir/build.make CMakeFiles/MyProject.dir/sources/opensg_vrpn.cpp.o.provides.build
-.PHONY : CMakeFiles/MyProject.dir/sources/opensg_vrpn.cpp.o.provides
+CMakeFiles/MyProject.dir/sources/LunarLanderCAVE.cpp.o.provides: CMakeFiles/MyProject.dir/sources/LunarLanderCAVE.cpp.o.requires
+	$(MAKE) -f CMakeFiles/MyProject.dir/build.make CMakeFiles/MyProject.dir/sources/LunarLanderCAVE.cpp.o.provides.build
+.PHONY : CMakeFiles/MyProject.dir/sources/LunarLanderCAVE.cpp.o.provides
 
-CMakeFiles/MyProject.dir/sources/opensg_vrpn.cpp.o.provides.build: CMakeFiles/MyProject.dir/sources/opensg_vrpn.cpp.o
+CMakeFiles/MyProject.dir/sources/LunarLanderCAVE.cpp.o.provides.build: CMakeFiles/MyProject.dir/sources/LunarLanderCAVE.cpp.o
+
+CMakeFiles/MyProject.dir/sources/collidingObject.cpp.o: CMakeFiles/MyProject.dir/flags.make
+CMakeFiles/MyProject.dir/sources/collidingObject.cpp.o: ../sources/collidingObject.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/ga78ced/student_project/CaveProject/build/CMakeFiles $(CMAKE_PROGRESS_2)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/MyProject.dir/sources/collidingObject.cpp.o"
+	/lrz/sys/compilers/gcc/5.1.0/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/MyProject.dir/sources/collidingObject.cpp.o -c /home/ga78ced/student_project/CaveProject/sources/collidingObject.cpp
+
+CMakeFiles/MyProject.dir/sources/collidingObject.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MyProject.dir/sources/collidingObject.cpp.i"
+	/lrz/sys/compilers/gcc/5.1.0/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/ga78ced/student_project/CaveProject/sources/collidingObject.cpp > CMakeFiles/MyProject.dir/sources/collidingObject.cpp.i
+
+CMakeFiles/MyProject.dir/sources/collidingObject.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MyProject.dir/sources/collidingObject.cpp.s"
+	/lrz/sys/compilers/gcc/5.1.0/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/ga78ced/student_project/CaveProject/sources/collidingObject.cpp -o CMakeFiles/MyProject.dir/sources/collidingObject.cpp.s
+
+CMakeFiles/MyProject.dir/sources/collidingObject.cpp.o.requires:
+.PHONY : CMakeFiles/MyProject.dir/sources/collidingObject.cpp.o.requires
+
+CMakeFiles/MyProject.dir/sources/collidingObject.cpp.o.provides: CMakeFiles/MyProject.dir/sources/collidingObject.cpp.o.requires
+	$(MAKE) -f CMakeFiles/MyProject.dir/build.make CMakeFiles/MyProject.dir/sources/collidingObject.cpp.o.provides.build
+.PHONY : CMakeFiles/MyProject.dir/sources/collidingObject.cpp.o.provides
+
+CMakeFiles/MyProject.dir/sources/collidingObject.cpp.o.provides.build: CMakeFiles/MyProject.dir/sources/collidingObject.cpp.o
 
 # Object files for target MyProject
 MyProject_OBJECTS = \
-"CMakeFiles/MyProject.dir/sources/opensg_vrpn.cpp.o"
+"CMakeFiles/MyProject.dir/sources/LunarLanderCAVE.cpp.o" \
+"CMakeFiles/MyProject.dir/sources/collidingObject.cpp.o"
 
 # External object files for target MyProject
 MyProject_EXTERNAL_OBJECTS =
 
-../exe/MyProject: CMakeFiles/MyProject.dir/sources/opensg_vrpn.cpp.o
+../exe/MyProject: CMakeFiles/MyProject.dir/sources/LunarLanderCAVE.cpp.o
+../exe/MyProject: CMakeFiles/MyProject.dir/sources/collidingObject.cpp.o
 ../exe/MyProject: CMakeFiles/MyProject.dir/build.make
 ../exe/MyProject: /sw-5.1.0/opensg/2.0/2015-01-16/lib64/libOSGBase.so
 ../exe/MyProject: /sw-5.1.0/opensg/2.0/2015-01-16/lib64/libOSGSystem.so
@@ -124,7 +149,8 @@ MyProject_EXTERNAL_OBJECTS =
 CMakeFiles/MyProject.dir/build: ../exe/MyProject
 .PHONY : CMakeFiles/MyProject.dir/build
 
-CMakeFiles/MyProject.dir/requires: CMakeFiles/MyProject.dir/sources/opensg_vrpn.cpp.o.requires
+CMakeFiles/MyProject.dir/requires: CMakeFiles/MyProject.dir/sources/LunarLanderCAVE.cpp.o.requires
+CMakeFiles/MyProject.dir/requires: CMakeFiles/MyProject.dir/sources/collidingObject.cpp.o.requires
 .PHONY : CMakeFiles/MyProject.dir/requires
 
 CMakeFiles/MyProject.dir/clean:
@@ -132,6 +158,6 @@ CMakeFiles/MyProject.dir/clean:
 .PHONY : CMakeFiles/MyProject.dir/clean
 
 CMakeFiles/MyProject.dir/depend:
-	cd /home/ga78ced/student_project/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ga78ced/student_project /home/ga78ced/student_project /home/ga78ced/student_project/build /home/ga78ced/student_project/build /home/ga78ced/student_project/build/CMakeFiles/MyProject.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/ga78ced/student_project/CaveProject/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ga78ced/student_project/CaveProject /home/ga78ced/student_project/CaveProject /home/ga78ced/student_project/CaveProject/build /home/ga78ced/student_project/CaveProject/build /home/ga78ced/student_project/CaveProject/build/CMakeFiles/MyProject.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/MyProject.dir/depend
 
