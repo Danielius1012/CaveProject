@@ -44,8 +44,8 @@ vrpn_Analog_Remote* analog = nullptr;
 const float BOOST_VALUE = .01f;
 const float GRAVITY_PULL = 1e-12;
 const float VELOCITY_THRESHOLD = 1.f;
+const float MOON_SURFACE = -1000.f;
 const int FUEL_AMOUNT = 100;
-int boostTest = 0;
 
 // USER
 CollidingObject playerCollider = CollidingObject("Player", Vec3f(0.f,0.f,0.f), 2.f); 
@@ -75,9 +75,18 @@ float objectRotationValue = 0.f;
 std::list<CollidingObject> objectList; 
 
 // Trasformable Objects
-NodeRecPtr cubeTransNode;
-NodeRecPtr torusTransNode;
+
+// FUEL
+NodeRecPtr fuel1TransNode;
+NodeRecPtr fuel2TransNode;
+NodeRecPtr fuel3TransNode;
+NodeRecPtr fuel4TransNode;
+
+// EARTH
 NodeRecPtr earthTransNode;
+
+// MOON
+NodeRecPtr moonTransNode;
 
 
 void cleanup()
@@ -104,81 +113,148 @@ NodeTransitPtr buildScene()
 
 	// --------------------------------------- CREATE OBJECTS ---------------------------------------------
 
-	// Insert Test Torus
-	NodeRecPtr testTorus = makeTorus(5.f, 10.f, 32.f, 64.f);
-	root->addChild(testTorus);
+	// FUEL 1
+	NodeRecPtr fuel1 = makeBox(30,30,30,10,10,10);
+	root->addChild(fuel1);
 
-	// Insert Cube
-	NodeRecPtr testCube = makeBox(30,30,30,10,10,10);
-	root->addChild(testCube);
+	// FUEL 2
+	NodeRecPtr fuel2 = makeBox(30,30,30,10,10,10);
+	root->addChild(fuel2);
+
+	// FUEL 3
+	NodeRecPtr fuel3 = makeBox(30,30,30,10,10,10);
+	root->addChild(fuel3);
+
+	// FUEL 4
+	NodeRecPtr fuel4 = makeBox(30,30,30,10,10,10);
+	root->addChild(fuel4);
 
 	//decouple the nodes to be shifted in hierarchy from the scene
-	root->subChild(testTorus);
-	root->subChild(testCube);
+	root->subChild(fuel1);
+	root->subChild(fuel2);
+	root->subChild(fuel3);
+	root->subChild(fuel4);
 
 	// ----------------------------------------------------------------------------------------------------
 
 	// ------------------------------------- TRANSFORMATION SETUP -----------------------------------------
 	
-	// TORUS
-	TransformRecPtr torusTransCore = Transform::create();
-	Matrix torusMatrix;
+	// FUEL 1 - TransCore
+	TransformRecPtr fuel1TransCore = Transform::create();
+	Matrix fuel1Matrix;
 
-	// CUBE
-	TransformRecPtr cubeTransCore = Transform::create();
-	Matrix cubeMatrix;
+	// FUEL 2 - TransCore
+	TransformRecPtr fuel2TransCore = Transform::create();
+	Matrix fuel2Matrix;
+
+	// FUEL 3 - TransCore
+	TransformRecPtr fuel3TransCore = Transform::create();
+	Matrix fuel3Matrix;
+
+	// FUEL 4 - TransCore
+	TransformRecPtr fuel4TransCore = Transform::create();
+	Matrix fuel4Matrix;
 
 	// ----------------------------------------------------------------------------------------------------
 
 	// ---------------------------------------- MATRIX SETUP ----------------------------------------------
 
-	// TORUS
-	torusMatrix.setIdentity();
-        torusMatrix.setTranslate(0,40,-50);
-	torusTransCore->setMatrix(torusMatrix);
+	// FUEL 1 Matrix
+	fuel1Matrix.setIdentity();
+	fuel1Matrix.setTranslate(0,40,-50);
+	fuel1TransCore->setMatrix(fuel1Matrix);
 
-	// CUBE
-	cubeMatrix.setIdentity();
-        cubeMatrix.setTranslate(0,20,-50);
-	cubeTransCore->setMatrix(cubeMatrix);
+	// FUEL 2 Matrix
+	fuel2Matrix.setIdentity();
+	fuel2Matrix.setTranslate(0,40,-50);
+	fuel2TransCore->setMatrix(fuel2Matrix);
+
+	// FUEL 3 Matrix
+	fuel3Matrix.setIdentity();
+	fuel3Matrix.setTranslate(0,40,-50);
+	fuel3TransCore->setMatrix(fuel3Matrix);
+
+	// FUEL 4 Matrix
+	fuel4Matrix.setIdentity();
+	fuel4Matrix.setTranslate(0,40,-50);
+	fuel4TransCore->setMatrix(fuel4Matrix);
 
 	// ----------------------------------------------------------------------------------------------------
 	
 	// ----------------------------------------- NODE SETUP -----------------------------------------------
 
-	// TORUS
-	torusTransNode = makeNodeFor(torusTransCore);
-	torusTransNode->addChild(testTorus);
+	// FUEL 1 Node
+	fuel1TransNode = makeNodeFor(fuel1TransCore);
+	fuel1TransNode->addChild(fuel1);
 
-	// CUBE
-	cubeTransNode = makeNodeFor(cubeTransCore);
-	cubeTransNode->addChild(testCube);
+	// FUEL 2 Node
+	fuel2TransNode = makeNodeFor(fuel2TransCore);
+	fuel2TransNode->addChild(fuel2);
+
+	// FUEL 3 Node
+	fuel3TransNode = makeNodeFor(fuel3TransCore);
+	fuel3TransNode->addChild(fuel3);
+
+	// FUEL 4 Node
+	fuel4TransNode = makeNodeFor(fuel4TransCore);
+	fuel4TransNode->addChild(fuel4);
 
 	// ----------------------------------------------------------------------------------------------------
 
 	// ------------------------------------------ TRANSFORM -----------------------------------------------
 
-	// TORUS
-	ComponentTransformRecPtr torusTrans = ComponentTransform::create();
-        torusTrans->setTranslation(Vec3f(-10.f,100.f,-400.f));
-	torusTrans->setRotation(Quaternion(Vec3f(1.f,0.f,0.f),osgDegree2Rad(90)));
+	// FUEL1 TRANSFORM
+	ComponentTransformRecPtr fuel1Trans = ComponentTransform::create();
+    fuel1Trans->setTranslation(Vec3f(-100.f,0.f,-400.f));
+	fuel1Trans->setRotation(Quaternion(Vec3f(1.f,0.f,0.f),osgDegree2Rad(90)));
 
-	torusTransNode = Node::create();
-	torusTransNode->setCore(torusTrans);
-	torusTransNode->addChild(testTorus);
+	fuel1TransNode = Node::create();
+	fuel1TransNode->setCore(fuel1Trans);
+	fuel1TransNode->addChild(fuel1);
 
-	// CUBE
-	ComponentTransformRecPtr cubeTrans = ComponentTransform::create();
-        cubeTrans->setTranslation(Vec3f(10.f,40.f,-400.f));
-	cubeTrans->setRotation(Quaternion(Vec3f(1.f,0.f,0.f),osgDegree2Rad(90)));
+	// FUEL2 TRANSFORM
+	ComponentTransformRecPtr fuel2Trans = ComponentTransform::create();
+    fuel2Trans->setTranslation(Vec3f(100.f,-200.f,-600.f));
+	fuel2Trans->setRotation(Quaternion(Vec3f(1.f,0.f,0.f),osgDegree2Rad(90)));
 
-	cubeTransNode = Node::create();
-	cubeTransNode->setCore(cubeTrans);
-	cubeTransNode->addChild(testCube);
+	fuel2TransNode = Node::create();
+	fuel2TransNode->setCore(fuel2Trans);
+	fuel2TransNode->addChild(fuel2);
+
+	// FUEL3 TRANSFORM
+	ComponentTransformRecPtr fuel3Trans = ComponentTransform::create();
+    fuel3Trans->setTranslation(Vec3f(200.f,-600.f,-400.f));
+	fuel3Trans->setRotation(Quaternion(Vec3f(1.f,0.f,0.f),osgDegree2Rad(90)));
+
+	fuel3TransNode = Node::create();
+	fuel3TransNode->setCore(fuel3Trans);
+	fuel3TransNode->addChild(fuel3);
+
+	// FUEL4 TRANSFORM
+	ComponentTransformRecPtr fuel4Trans = ComponentTransform::create();
+    fuel4Trans->setTranslation(Vec3f(-100.f,0.f,-400.f));
+	fuel4Trans->setRotation(Quaternion(Vec3f(1.f,0.f,0.f),osgDegree2Rad(90)));
+
+	fuel4TransNode = Node::create();
+	fuel4TransNode->setCore(fuel4Trans);
+	fuel4TransNode->addChild(fuel4);
+
+	// ADD COLLISION VOLUMES TO NODES
+	CollidingObject fuel1Collider = CollidingObject("Fuel", Vec3f(-100.f,0.f,-400.f), 30.f); 
+	CollidingObject fuel2Collider = CollidingObject("Fuel", Vec3f(100.f,-200.f,-600.f), 30.f); 
+	CollidingObject fuel3Collider = CollidingObject("Fuel", Vec3f(200.f,-600.f,-400.f), 30.f); 
+	CollidingObject fuel4Collider = CollidingObject("Fuel", Vec3f(-200.f,-800.f,-200.f), 30.f); 
+
+	objectList.push_front(fuel4Collider);
+	objectList.push_front(fuel3Collider);
+	objectList.push_front(fuel2Collider);
+	objectList.push_front(fuel1Collider);
 
 	// ADD NODES TO SCENE
-	root->addChild(torusTransNode);
-	root->addChild(cubeTransNode);
+	root->addChild(fuel1TransNode);
+	root->addChild(fuel2TransNode);
+	root->addChild(fuel3TransNode);
+	root->addChild(fuel4TransNode);
 
 	// ----------------------------------------------------------------------------------------------------
 
@@ -194,6 +270,23 @@ NodeTransitPtr buildScene()
 	earthTransNode->addChild(earth);
 
 	root->addChild(earthTransNode);
+
+	// ADD MOON SURFACE
+	NodeRecPtr moonSurface = SceneFileHandler::the()->read("models/moon.3DS");
+
+	ComponentTransformRecPtr moonTrans = ComponentTransform::create();
+	//earthTrans->setTranslation(Vec3f(1000.f,1000.f,-3000.f));
+	moonTrans->setTranslation(Vec3f(0.f,-1000.f,0.f));
+	moonTrans->setScale(Vec3f(1000.f,1.f,1000.f));
+	
+	moonTransNode = makeNodeFor(moonTrans);
+	moonTransNode->addChild(moonSurface);
+
+	// ADD MOON COLLIDER - PROBLEM RADIUS ----------------------------------------------------------------------------------------------------------------------------------------------
+	CollidingObject moonCollider = CollidingObject("Moon", Vec3f(0.f,-1000.f,0.f), 50.f); 
+	objectList.push_front(moonCollider);
+
+	root->addChild(moonTransNode);
 
 	// SKYBOX
 	/*std::string skyPath = Configuration::getPath("Skybox");
@@ -221,9 +314,7 @@ void activateBoost(void)
                 fuel -= 5;
                 boostStartTime = boostCurrentTime;
             }
-
 	}
-
 }
 
 template<typename T>
@@ -306,18 +397,26 @@ void objectMotion()
 {
 	objectRotationValue += 0.001f;
 
-	// Transform Cube
-	ComponentTransformRecPtr cubeDynTrans = dynamic_cast<ComponentTransform*>(cubeTransNode->getCore());
-        //cubeDynTrans->setRotation(Quaternion(Vec3f(1,0,0), osgDegree2Rad(90) + objectRotationValue));
+	// Transform Fuel 1
+	ComponentTransformRecPtr fuel1DynTrans = dynamic_cast<ComponentTransform*>(fuel1TransNode->getCore());
+    fuel1DynTrans->setRotation(Quaternion(Vec3f(1,0,0), osgDegree2Rad(90) + objectRotationValue));
 	
-	// Transform Torus
-	ComponentTransformRecPtr torusDynTrans = dynamic_cast<ComponentTransform*>(torusTransNode->getCore());
-        //torusDynTrans->setRotation(Quaternion(Vec3f(1,0,0), osgDegree2Rad(90) + objectRotationValue));
+	// Transform Fuel 2
+	ComponentTransformRecPtr fuel2DynTrans = dynamic_cast<ComponentTransform*>(fuel2TransNode->getCore());
+    fuel2DynTrans->setRotation(Quaternion(Vec3f(1,0,0), osgDegree2Rad(90) + objectRotationValue));
 
-      // Rotate Earth
+	// Transform Fuel 3
+	ComponentTransformRecPtr fuel3DynTrans = dynamic_cast<ComponentTransform*>(fuel3TransNode->getCore());
+    fuel3DynTrans->setRotation(Quaternion(Vec3f(1,0,0), osgDegree2Rad(90) + objectRotationValue));
+
+	// Transform Fuel 4
+	ComponentTransformRecPtr fuel4DynTrans = dynamic_cast<ComponentTransform*>(fuel4TransNode->getCore());
+    fuel4DynTrans->setRotation(Quaternion(Vec3f(1,0,0), osgDegree2Rad(90) + objectRotationValue));
+
+    // Rotate Earth
 	ComponentTransformRecPtr earthDynTrans = dynamic_cast<ComponentTransform*>(earthTransNode->getCore());
-     earthDynTrans->setRotation(Quaternion(Vec3f(0,1,1), osgDegree2Rad(90) + objectRotationValue));
-     earthDynTrans->setTranslation(Vec3f(100000.f,mgr->getTranslation().y(),-385000.f));
+    earthDynTrans->setRotation(Quaternion(Vec3f(0,1,1), osgDegree2Rad(90) + objectRotationValue));
+    earthDynTrans->setTranslation(Vec3f(100000.f,mgr->getTranslation().y(),-385000.f));
 
       // EXAMPLES:
 	//bt->setTranslation(Vec3f(10,5,0));
@@ -397,15 +496,16 @@ void checkCollision(void)
 		if(playerCollider.isColliding(*obj))
 		{
 			char* cat = obj->getCategory();
-			
-			// Testausgabe
-			std::cout << "Category: "  << cat;
+			std::cout << "CAT: " << cat << "\n";
 
 			// Check for Category - Fuel or Moon
 			if(cat == "Fuel")
 			{
 				// if fuel, add FUEL_AMOUNT and destroy object
 				fuel += FUEL_AMOUNT;
+
+				// Remove object from root - PROBLEM WHAT IS THE OBJECT TO REMOVE? ----------------------------------------------------------------------------------------
+
 			}
 			else if(cat == "Moon")
 			{
@@ -418,6 +518,7 @@ void checkCollision(void)
 				{
 					// lose
 				}
+				resetScene();
 			}
 			else
 			{
@@ -432,25 +533,26 @@ void checkCollision(void)
 void update(void)
 {
 	// Get current time
-      currentTime = std::chrono::high_resolution_clock::now();
+    currentTime = std::chrono::high_resolution_clock::now();
 	
 	// std::chrono::duration<double> difference = currentTime - startTime;
 	auto difference = currentTime - startTime;
 
 	// Calculate Gravity and apply to velocity
-     currentVelocity -= GRAVITY_PULL * difference.count();
+    currentVelocity -= GRAVITY_PULL * difference.count();
 	startTime = currentTime;
 
-        // APPLY FORCES
+    // APPLY FORCES
 	userMovement += Vec3f(0.f ,currentVelocity, 0.f);
+	hight += currentVelocity;
 
-      // transform the objects
-        objectMotion();
+    // transform the objects
+    objectMotion();
 
 	// Check for collision
 	checkCollision();
 
-     std::cout << "Vel: " << currentVelocity << "\n";
+	std::cout << "Vel: " << currentVelocity << "\n";
 
 	
 }
@@ -473,7 +575,53 @@ void idle(void)
 	OSG::Thread::getCurrentChangeList()->clear();
 }
 
+void resetScene(void)
+{
+	/*
+	playerCollider = CollidingObject("Player", Vec3f(0.f,0.f,0.f), 2.f); 
 
+	userMovement = Vec3f(0.f, 0.f, 0.f);
+
+	// Start time for boost 
+	boostStartTime = std::chrono::high_resolution_clock::now();
+
+	// the last measured time - for differnce 
+	startTime = std::chrono::high_resolution_clock::now();
+
+	// The current time
+	currentTime = std::chrono::high_resolution_clock::now();
+
+	// player speed - manipulated by gravity and boost
+	currentVelocity = 0.f;
+
+	// current height above moon surface
+	hight = 100.f;
+
+	// The user starts with 100 units of fuel - every boost burns 10 units
+	fuel = FUEL_AMOUNT;
+
+	// OBJECTS
+	objectRotationValue = 0.f;
+	objectList; 
+
+	// Trasformable Objects
+
+	// FUEL
+	fuel1TransNode;
+	fuel2TransNode;
+	fuel3TransNode;
+	fuel4TransNode;
+
+	// EARTH
+	earthTransNode;
+
+	// MOON
+	moonTransNode;
+
+	// PLAYER POSITION RESET
+	// TODO
+	*/
+}
 
 void setupGLUT(int *argc, char *argv[])
 {
