@@ -116,19 +116,19 @@ NodeTransitPtr buildScene()
 	// --------------------------------------- CREATE OBJECTS ---------------------------------------------
 
 	// FUEL 1
-	NodeRecPtr fuel1 = makeBox(30,30,30,10,10,10);
+	NodeRecPtr fuel1 = SceneFileHandler::the()->read("models/fuel.3DS");
 	root->addChild(fuel1);
 
 	// FUEL 2
-	NodeRecPtr fuel2 = makeBox(30,30,30,10,10,10);
+	NodeRecPtr fuel2 = SceneFileHandler::the()->read("models/fuel.3DS");
 	root->addChild(fuel2);
 
 	// FUEL 3
-	NodeRecPtr fuel3 = makeBox(30,30,30,10,10,10);
+	NodeRecPtr fuel3 = SceneFileHandler::the()->read("models/fuel.3DS");
 	root->addChild(fuel3);
 
 	// FUEL 4
-	NodeRecPtr fuel4 = makeBox(30,30,30,10,10,10);
+	NodeRecPtr fuel4 = SceneFileHandler::the()->read("models/fuel.3DS");
 	root->addChild(fuel4);
 
 	//decouple the nodes to be shifted in hierarchy from the scene
@@ -207,8 +207,9 @@ NodeTransitPtr buildScene()
 
 	// FUEL1 TRANSFORM
 	ComponentTransformRecPtr fuel1Trans = ComponentTransform::create();
-    	fuel1Trans->setTranslation(Vec3f(-100.f,0.f,-400.f));
+    fuel1Trans->setTranslation(Vec3f(-100.f,0.f,-400.f));
 	fuel1Trans->setRotation(Quaternion(Vec3f(1.f,0.f,0.f),osgDegree2Rad(90)));
+	fuel1Trans->setScale(Vec3f(7.f,7.f,7.f));
 
 	fuel1TransNode = Node::create();
 	fuel1TransNode->setCore(fuel1Trans);
@@ -216,8 +217,9 @@ NodeTransitPtr buildScene()
 
 	// FUEL2 TRANSFORM
 	ComponentTransformRecPtr fuel2Trans = ComponentTransform::create();
-    	fuel2Trans->setTranslation(Vec3f(100.f,-200.f,-600.f));
+    fuel2Trans->setTranslation(Vec3f(100.f,-200.f,-600.f));
 	fuel2Trans->setRotation(Quaternion(Vec3f(1.f,0.f,0.f),osgDegree2Rad(90)));
+	fuel2Trans->setScale(Vec3f(7.f,7.f,7.f));
 
 	fuel2TransNode = Node::create();
 	fuel2TransNode->setCore(fuel2Trans);
@@ -225,8 +227,9 @@ NodeTransitPtr buildScene()
 
 	// FUEL3 TRANSFORM
 	ComponentTransformRecPtr fuel3Trans = ComponentTransform::create();
-    	fuel3Trans->setTranslation(Vec3f(200.f,-600.f,-400.f));
+    fuel3Trans->setTranslation(Vec3f(200.f,-600.f,-400.f));
 	fuel3Trans->setRotation(Quaternion(Vec3f(1.f,0.f,0.f),osgDegree2Rad(90)));
+	fuel3Trans->setScale(Vec3f(7.f,7.f,7.f));
 
 	fuel3TransNode = Node::create();
 	fuel3TransNode->setCore(fuel3Trans);
@@ -234,8 +237,9 @@ NodeTransitPtr buildScene()
 
 	// FUEL4 TRANSFORM
 	ComponentTransformRecPtr fuel4Trans = ComponentTransform::create();
-    	fuel4Trans->setTranslation(Vec3f(-100.f,0.f,-400.f));
+    fuel4Trans->setTranslation(Vec3f(-100.f,0.f,-400.f));
 	fuel4Trans->setRotation(Quaternion(Vec3f(1.f,0.f,0.f),osgDegree2Rad(90)));
+	fuel4Trans->setScale(Vec3f(7.f,7.f,7.f));
 
 	fuel4TransNode = Node::create();
 	fuel4TransNode->setCore(fuel4Trans);
@@ -277,7 +281,6 @@ NodeTransitPtr buildScene()
 	NodeRecPtr moonSurface = SceneFileHandler::the()->read("models/moon.3DS");
 
 	ComponentTransformRecPtr moonTrans = ComponentTransform::create();
-	//earthTrans->setTranslation(Vec3f(1000.f,1000.f,-3000.f));
 	moonTrans->setTranslation(Vec3f(1000.f,-1000.f,-1000.f));
 	moonTrans->setScale(Vec3f(2000.f,1.f,2000.f));
 	
@@ -286,17 +289,6 @@ NodeTransitPtr buildScene()
 
 	root->addChild(moonTransNode);
 
-	// SKYBOX
-	/*std::string skyPath = Configuration::getPath("Skybox");
-	skybox.init(5,5,5, 1000, (skyPath+"lostatseaday/lostatseaday_dn.jpg").c_str(),
-		(skyPath+"lostatseaday/lostatseaday_up.jpg").c_str(),
-		(skyPath+"lostatseaday/lostatseaday_ft.jpg").c_str(),
-		(skyPath+"lostatseaday/lostatseaday_bk.jpg").c_str(),
-		(skyPath+"lostatseaday/lostatseaday_rt.jpg").c_str(),
-		(skyPath+"lostatseaday/lostatseaday_lf.jpg").c_str());
-		
-	root->addChild(skybox.getNodePtr());*/
-	
 	return NodeTransitPtr(root);
 }
 
@@ -400,27 +392,28 @@ void print_tracker()
 void objectMotion()
 {
 	objectRotationValue += 0.001f;
+	Quaternion fuelRotation = Quaternion(Vec3f(0,1,0), osgDegree2Rad(90) + objectRotationValue) + Quaternion(Vec3f(0,0,1), osgDegree2Rad(90));
 
 	// Transform Fuel 1
 	ComponentTransformRecPtr fuel1DynTrans = dynamic_cast<ComponentTransform*>(fuel1TransNode->getCore());
-    	fuel1DynTrans->setRotation(Quaternion(Vec3f(1,0,0), osgDegree2Rad(90) + objectRotationValue));
+    fuel1DynTrans->setRotation(fuelRotation);
 	
 	// Transform Fuel 2
 	ComponentTransformRecPtr fuel2DynTrans = dynamic_cast<ComponentTransform*>(fuel2TransNode->getCore());
-    	fuel2DynTrans->setRotation(Quaternion(Vec3f(1,0,0), osgDegree2Rad(90) + objectRotationValue));
+    fuel2DynTrans->setRotation(fuelRotation);
 
 	// Transform Fuel 3
 	ComponentTransformRecPtr fuel3DynTrans = dynamic_cast<ComponentTransform*>(fuel3TransNode->getCore());
-    	fuel3DynTrans->setRotation(Quaternion(Vec3f(1,0,0), osgDegree2Rad(90) + objectRotationValue));
+    fuel3DynTrans->setRotation(fuelRotation);
 
 	// Transform Fuel 4
 	ComponentTransformRecPtr fuel4DynTrans = dynamic_cast<ComponentTransform*>(fuel4TransNode->getCore());
-    	fuel4DynTrans->setRotation(Quaternion(Vec3f(1,0,0), osgDegree2Rad(90) + objectRotationValue));
+    fuel4DynTrans->setRotation(fuelRotation);
 
-    	// Rotate Earth
+    // Rotate Earth
 	ComponentTransformRecPtr earthDynTrans = dynamic_cast<ComponentTransform*>(earthTransNode->getCore());
-    	earthDynTrans->setRotation(Quaternion(Vec3f(0,1,1), osgDegree2Rad(90) + objectRotationValue));
-    	earthDynTrans->setTranslation(Vec3f(100000.f,mgr->getTranslation().y(),-385000.f));
+    earthDynTrans->setRotation(Quaternion(Vec3f(0,1,1), osgDegree2Rad(90) + objectRotationValue));
+    earthDynTrans->setTranslation(Vec3f(100000.f,mgr->getTranslation().y() + 100000.f,-385000.f));
 
       	// EXAMPLES:
 	//bt->setTranslation(Vec3f(10,5,0));
@@ -581,12 +574,12 @@ void update(void)
     	currentVelocity -= GRAVITY_PULL * difference.count();
 	startTime = currentTime;
 
-    	// APPLY FORCES
+    // APPLY FORCES
 	userMovement += Vec3f(0.f ,currentVelocity, 0.f);
 	height = HEIGHT_START + mgr->getTranslation().y() + userMovement.y();
 
-    	// transform the objects
-    	objectMotion();
+    // transform the objects
+    objectMotion();
 
 	// Check for collision
 	checkCollision();
@@ -607,7 +600,7 @@ void idle(void)
 	if(height < 0)
 	{
 		mgr->setUserTransform(head_position, head_orientation);
-    		mgr->setTranslation(mgr->getTranslation() + speed * analog_values);
+    	mgr->setTranslation(mgr->getTranslation() + speed * analog_values);
 		
 		// Check velocity
 		if(abs(currentVelocity) < VELOCITY_THRESHOLD)
@@ -624,8 +617,8 @@ void idle(void)
 	else
 	{
 		// TRANSFORM AND TRANSLATE
-	    	mgr->setUserTransform(head_position, head_orientation);
-	    	mgr->setTranslation(mgr->getTranslation()  + userMovement + speed * analog_values);
+	    mgr->setUserTransform(head_position, head_orientation);
+	    mgr->setTranslation(mgr->getTranslation()  + userMovement + speed * analog_values);
 		std::cout << "USER: " << userMovement<< "\n";
 		std::cout << "MNGR: " << mgr->getTranslation() << "\n";
 		std::cout << "ANLG: " << analog_values<< "\n";
