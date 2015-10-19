@@ -54,7 +54,7 @@ bool CollidingObject::isColliding(CollidingObject otherObject)
 {
 	float r = this->getRadius();
 	OSG::Vec3f thisPos = this->getPosition();
-	OSG::Vec3f objectPos = otherObject.getPosition();
+	OSG::Vec3f objectPos = otherObject->getPosition();
 
 	float objectX = objectPos.x();
 	float objectY = objectPos.y();

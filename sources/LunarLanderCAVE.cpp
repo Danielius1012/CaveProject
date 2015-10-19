@@ -37,6 +37,7 @@ OSGCSM::CAVESceneManager *mgr = nullptr;
 vrpn_Tracker_Remote* tracker =  nullptr;
 vrpn_Button_Remote* button = nullptr;
 vrpn_Analog_Remote* analog = nullptr;
+NodeRecPtr root;
 
 //Skybox skybox;                        // scene surroundings
 
@@ -47,6 +48,7 @@ const float VELOCITY_THRESHOLD = 1.f;
 const float MOON_SURFACE = -1000.f;
 const float HEIGHT_START = 900.f;	// take surface model into account
 const int BOOST_TIME_THRESHOLD = 1e9;	// 1 billion nanoseconds = 1s
+const int RESET_COUNTDOWN = 5e9;
 const int FUEL_AMOUNT = 100;
 
 // USER
@@ -74,7 +76,7 @@ int fuel = FUEL_AMOUNT;
 
 // OBJECTS
 float objectRotationValue = 0.f;
-std::list<CollidingObject> objectList; 
+std::list<CollidingObject*> objectList; 
 
 // Trasformable Objects
 
@@ -108,7 +110,7 @@ NodeTransitPtr buildScene()
 {
 	// ---------------------------------------- SETUP ROOT ------------------------------------------------
 
-	NodeRecPtr root = Node::create();
+	root = Node::create();
 	root->setCore(Group::create());
 
 	// ----------------------------------------------------------------------------------------------------
@@ -116,27 +118,17 @@ NodeTransitPtr buildScene()
 	// --------------------------------------- CREATE OBJECTS ---------------------------------------------
 
 	// FUEL 1
-	NodeRecPtr fuel1 = SceneFileHandler::the()->read("models/fuel.3DS");
-	root->addChild(fuel1);
+	//NodeRecPtr fuel1 = SceneFileHandler::the()->read("models/fuel.3DS");
+	NodeRecPtr fuel1 = makeBox(30,30,30,10,10,10);
 
 	// FUEL 2
-	NodeRecPtr fuel2 = SceneFileHandler::the()->read("models/fuel.3DS");
-	root->addChild(fuel2);
+	NodeRecPtr fuel2 = makeBox(30,30,30,10,10,10);
 
 	// FUEL 3
-	NodeRecPtr fuel3 = SceneFileHandler::the()->read("models/fuel.3DS");
-	root->addChild(fuel3);
+	NodeRecPtr fuel3 = makeBox(30,30,30,10,10,10);
 
 	// FUEL 4
-	NodeRecPtr fuel4 = SceneFileHandler::the()->read("models/fuel.3DS");
-	root->addChild(fuel4);
-
-	//decouple the nodes to be shifted in hierarchy from the scene
-	root->subChild(fuel1);
-	root->subChild(fuel2);
-	root->subChild(fuel3);
-	root->subChild(fuel4);
-
+	NodeRecPtr fuel4 = makeBox(30,30,30,10,10,10);
 	// ----------------------------------------------------------------------------------------------------
 
 	// ------------------------------------- TRANSFORMATION SETUP -----------------------------------------
@@ -207,9 +199,9 @@ NodeTransitPtr buildScene()
 
 	// FUEL1 TRANSFORM
 	ComponentTransformRecPtr fuel1Trans = ComponentTransform::create();
-    fuel1Trans->setTranslation(Vec3f(-100.f,0.f,-400.f));
+    	fuel1Trans->setTranslation(Vec3f(-100.f,0.f,-400.f));
 	fuel1Trans->setRotation(Quaternion(Vec3f(1.f,0.f,0.f),osgDegree2Rad(90)));
-	fuel1Trans->setScale(Vec3f(7.f,7.f,7.f));
+	fuel1Trans->setScale(Vec3f(2.f,2.f,2.f));
 
 	fuel1TransNode = Node::create();
 	fuel1TransNode->setCore(fuel1Trans);
@@ -217,9 +209,9 @@ NodeTransitPtr buildScene()
 
 	// FUEL2 TRANSFORM
 	ComponentTransformRecPtr fuel2Trans = ComponentTransform::create();
-    fuel2Trans->setTranslation(Vec3f(100.f,-200.f,-600.f));
+    	fuel2Trans->setTranslation(Vec3f(100.f,-200.f,-600.f));
 	fuel2Trans->setRotation(Quaternion(Vec3f(1.f,0.f,0.f),osgDegree2Rad(90)));
-	fuel2Trans->setScale(Vec3f(7.f,7.f,7.f));
+	fuel2Trans->setScale(Vec3f(2.f,2.f,2.f));
 
 	fuel2TransNode = Node::create();
 	fuel2TransNode->setCore(fuel2Trans);
@@ -227,9 +219,9 @@ NodeTransitPtr buildScene()
 
 	// FUEL3 TRANSFORM
 	ComponentTransformRecPtr fuel3Trans = ComponentTransform::create();
-    fuel3Trans->setTranslation(Vec3f(200.f,-600.f,-400.f));
+    	fuel3Trans->setTranslation(Vec3f(200.f,-600.f,-400.f));
 	fuel3Trans->setRotation(Quaternion(Vec3f(1.f,0.f,0.f),osgDegree2Rad(90)));
-	fuel3Trans->setScale(Vec3f(7.f,7.f,7.f));
+	fuel3Trans->setScale(Vec3f(2.f,2.f,2.f));
 
 	fuel3TransNode = Node::create();
 	fuel3TransNode->setCore(fuel3Trans);
@@ -237,19 +229,19 @@ NodeTransitPtr buildScene()
 
 	// FUEL4 TRANSFORM
 	ComponentTransformRecPtr fuel4Trans = ComponentTransform::create();
-    fuel4Trans->setTranslation(Vec3f(-100.f,0.f,-400.f));
+    	fuel4Trans->setTranslation(Vec3f(-100.f,0.f,-400.f));
 	fuel4Trans->setRotation(Quaternion(Vec3f(1.f,0.f,0.f),osgDegree2Rad(90)));
-	fuel4Trans->setScale(Vec3f(7.f,7.f,7.f));
+	fuel4Trans->setScale(Vec3f(2.f,2.f,2.f));
 
 	fuel4TransNode = Node::create();
 	fuel4TransNode->setCore(fuel4Trans);
 	fuel4TransNode->addChild(fuel4);
 
 	// ADD COLLISION VOLUMES TO NODES
-	CollidingObject fuel1Collider = CollidingObject("Fuel", Vec3f(-100.f,0.f,-400.f), 30.f); 
-	CollidingObject fuel2Collider = CollidingObject("Fuel", Vec3f(100.f,-200.f,-600.f), 30.f); 
-	CollidingObject fuel3Collider = CollidingObject("Fuel", Vec3f(200.f,-600.f,-400.f), 30.f); 
-	CollidingObject fuel4Collider = CollidingObject("Fuel", Vec3f(-200.f,-800.f,-200.f), 30.f); 
+	CollidingObject* fuel1Collider = new CollidingObject("Fuel1", Vec3f(-100.f,0.f,-400.f), 300.f); 
+	CollidingObject* fuel2Collider = new CollidingObject("Fuel2", Vec3f(100.f,-200.f,-600.f), 300.f); 
+	CollidingObject* fuel3Collider = new CollidingObject("Fuel3", Vec3f(200.f,-600.f,-400.f), 300.f); 
+	CollidingObject* fuel4Collider = new CollidingObject("Fuel4", Vec3f(-200.f,-800.f,-200.f), 300.f); 
 
 	objectList.push_front(fuel4Collider);
 	objectList.push_front(fuel3Collider);
@@ -282,12 +274,16 @@ NodeTransitPtr buildScene()
 
 	ComponentTransformRecPtr moonTrans = ComponentTransform::create();
 	moonTrans->setTranslation(Vec3f(1000.f,-1000.f,-1000.f));
-	moonTrans->setScale(Vec3f(2000.f,1.f,2000.f));
+	moonTrans->setScale(Vec3f(1000.f,1.f,1000.f));
 	
 	moonTransNode = makeNodeFor(moonTrans);
 	moonTransNode->addChild(moonSurface);
 
 	root->addChild(moonTransNode);
+
+	// WINNING TEAPOT - GREEN
+
+	// LOSING TEAPOT - RED
 
 	return NodeTransitPtr(root);
 }
@@ -482,7 +478,6 @@ void display(void)
 
 void resetScene(void)
 {
-        /*
         playerCollider = CollidingObject("Player", Vec3f(0.f,0.f,0.f), 2.f);
 
         userMovement = Vec3f(0.f, 0.f, 0.f);
@@ -524,38 +519,77 @@ void resetScene(void)
         moonTransNode;
 
         // PLAYER POSITION RESET
-        // TODO
-        */
+    	mgr->setTranslation(Vec3f(0.f,0.f,0.f));
 }
 
 // COLLISION - PLAYER WITH OBJECTS
 void checkCollision(void)
 {
 	// update collision Object based on player 
-	playerCollider = CollidingObject("Player", head_position + userMovement, 2.f);
+	playerCollider = CollidingObject("Player", head_position + userMovement, 200.f);
 
 	// For every object in the objectList
-	for (std::list<CollidingObject>::iterator obj = objectList.begin(); obj != objectList.end(); obj++)
+	for (std::list<CollidingObject*>::iterator obj = objectList.begin(); obj != objectList.end(); )
 	{
+		//std::cout << "CATEGORY: " << (*obj)->getCategory()	<< std::endl;
 		// If colliding, check for category
-		if(playerCollider.isColliding(*obj))
+		if(playerCollider.isColliding(**obj))
 		{
-			char* cat = obj->getCategory();
-			std::cout << "CAT: " << cat << "\n";
+			char* cat = (*obj)->getCategory();
+			std::cout << "CAT: " << cat << std::endl;
 
 			// Check for Category - Fuel or Moon
-			if(cat == "Fuel")
+			if(cat == "Fuel1")
 			{
 				// if fuel, add FUEL_AMOUNT and destroy object
 				fuel += FUEL_AMOUNT;
 
-				// Remove object from root - PROBLEM WHAT IS THE OBJECT TO REMOVE? ----------------------------------------------------------------------------------------
+				// Remove object from root
+				root->subChild(fuel1TransNode);
+				delete (*obj);
+				obj = objectList.erase(obj);
+				std::cout << "FUEL 1 Killed!" << std::endl;
+			}
+			else if(cat == "Fuel2")
+			{
+				// if fuel, add FUEL_AMOUNT and destroy object
+				fuel += FUEL_AMOUNT;
 
+				// Remove object from root
+				root->subChild(fuel2TransNode);
+				delete (*obj);
+				obj = objectList.erase(obj);
+				std::cout << "FUEL 2 Killed!" << std::endl;
+			}
+			else if(cat == "Fuel3")
+			{
+				// if fuel, add FUEL_AMOUNT and destroy object
+				fuel += FUEL_AMOUNT;
+
+				// Remove object from root
+				root->subChild(fuel3TransNode);
+				delete (*obj);
+				obj = objectList.erase(obj);
+				std::cout << "FUEL 3 Killed!" << std::endl;
+			}
+			else if(cat == "Fuel4")
+			{
+				// if fuel, add FUEL_AMOUNT and destroy object
+				fuel += FUEL_AMOUNT;
+
+				// Remove object from root
+				root->subChild(fuel4TransNode);
+				delete (*obj);
+				obj = objectList.erase(obj);
+				std::cout << "FUEL 4 Killed!" << std::endl;
 			}
 			else
-			{
-			
+			{	
+				++obj;
+
 			}
+		}else {
+			++obj;
 		}	
 	}
 }
@@ -574,18 +608,18 @@ void update(void)
     	currentVelocity -= GRAVITY_PULL * difference.count();
 	startTime = currentTime;
 
-    // APPLY FORCES
+    	// APPLY FORCES
 	userMovement += Vec3f(0.f ,currentVelocity, 0.f);
 	height = HEIGHT_START + mgr->getTranslation().y() + userMovement.y();
 
-    // transform the objects
-    objectMotion();
+    	// transform the objects
+    	objectMotion();
 
 	// Check for collision
 	checkCollision();
 
-	std::cout << "Velo: " << currentVelocity << "\n";
-	std::cout << "High: " << height << "\n";
+	// std::cout << "Velo: " << currentVelocity << "\n";
+	// std::cout << "High: " << height << "\n";
 
 	
 }
@@ -600,7 +634,9 @@ void idle(void)
 	if(height < 0)
 	{
 		mgr->setUserTransform(head_position, head_orientation);
-    	mgr->setTranslation(mgr->getTranslation() + speed * analog_values);
+    		mgr->setTranslation(mgr->getTranslation() + speed * analog_values);
+		
+		auto startResetCounter = std::chrono::high_resolution_clock::now();
 		
 		// Check velocity
 		if(abs(currentVelocity) < VELOCITY_THRESHOLD)
@@ -611,18 +647,25 @@ void idle(void)
 		{
 			// lose
 		}
-		// resetScene();
+		
+		auto endResetcounter = std::chrono::high_resolution_clock::now();
+		
+		while((endResetcounter - startResetCounter).count() < RESET_COUNTDOWN)
+		{
+			endResetcounter = std::chrono::high_resolution_clock::now();
+		}
+		resetScene();
 		currentVelocity = 0;
 	}
 	else
 	{
 		// TRANSFORM AND TRANSLATE
-	    mgr->setUserTransform(head_position, head_orientation);
-	    mgr->setTranslation(mgr->getTranslation()  + userMovement + speed * analog_values);
-		std::cout << "USER: " << userMovement<< "\n";
-		std::cout << "MNGR: " << mgr->getTranslation() << "\n";
-		std::cout << "ANLG: " << analog_values<< "\n";
-		std::cout << "SPED: " << speed<< "\n";
+	    	mgr->setUserTransform(head_position, head_orientation);
+	    	mgr->setTranslation(mgr->getTranslation()  + userMovement + speed * analog_values);
+		//std::cout << "USER: " << userMovement<< "\n";
+		//std::cout << "MNGR: " << mgr->getTranslation() << "\n";
+		//std::cout << "ANLG: " << analog_values<< "\n";
+		//std::cout << "SPED: " << speed<< "\n";
 	}	
 	
 	
