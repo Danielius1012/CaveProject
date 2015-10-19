@@ -44,11 +44,11 @@ NodeRecPtr root;
 // MOVEMENT VALUES
 const float BOOST_VALUE = .01f;
 const float GRAVITY_PULL = 1e-12;
-const float VELOCITY_THRESHOLD = 1.f;
+const float VELOCITY_THRESHOLD = 1 * 1e-4;
 const float MOON_SURFACE = -1000.f;
 const float HEIGHT_START = 900.f;	// take surface model into account
 const int BOOST_TIME_THRESHOLD = 1e9;	// 1 billion nanoseconds = 1s
-const int RESET_COUNTDOWN = 5e9;
+const int RESET_COUNTDOWN = 5 * 1e7;	// first number = seconds on the moon
 const int FUEL_AMOUNT = 100;
 
 // USER
@@ -77,6 +77,8 @@ int fuel = FUEL_AMOUNT;
 // OBJECTS
 float objectRotationValue = 0.f;
 std::list<CollidingObject*> objectList; 
+bool isReset = true;
+auto startResetCounter = std::chrono::high_resolution_clock::now();
 
 // Trasformable Objects
 
@@ -92,6 +94,9 @@ NodeRecPtr earthTransNode;
 // MOON
 NodeRecPtr moonTransNode;
 
+// TEAPOTS
+NodeRecPtr winTeapotTransNode;
+NodeRecPtr lostTeapotTransNode;
 
 void cleanup()
 {
@@ -199,7 +204,7 @@ NodeTransitPtr buildScene()
 
 	// FUEL1 TRANSFORM
 	ComponentTransformRecPtr fuel1Trans = ComponentTransform::create();
-    	fuel1Trans->setTranslation(Vec3f(-100.f,0.f,-400.f));
+    fuel1Trans->setTranslation(Vec3f(-100.f,0.f,-400.f));
 	fuel1Trans->setRotation(Quaternion(Vec3f(1.f,0.f,0.f),osgDegree2Rad(90)));
 	fuel1Trans->setScale(Vec3f(2.f,2.f,2.f));
 
@@ -209,7 +214,7 @@ NodeTransitPtr buildScene()
 
 	// FUEL2 TRANSFORM
 	ComponentTransformRecPtr fuel2Trans = ComponentTransform::create();
-    	fuel2Trans->setTranslation(Vec3f(100.f,-200.f,-600.f));
+    fuel2Trans->setTranslation(Vec3f(100.f,-200.f,-600.f));
 	fuel2Trans->setRotation(Quaternion(Vec3f(1.f,0.f,0.f),osgDegree2Rad(90)));
 	fuel2Trans->setScale(Vec3f(2.f,2.f,2.f));
 
@@ -219,7 +224,7 @@ NodeTransitPtr buildScene()
 
 	// FUEL3 TRANSFORM
 	ComponentTransformRecPtr fuel3Trans = ComponentTransform::create();
-    	fuel3Trans->setTranslation(Vec3f(200.f,-600.f,-400.f));
+    fuel3Trans->setTranslation(Vec3f(200.f,-600.f,-400.f));
 	fuel3Trans->setRotation(Quaternion(Vec3f(1.f,0.f,0.f),osgDegree2Rad(90)));
 	fuel3Trans->setScale(Vec3f(2.f,2.f,2.f));
 
@@ -229,7 +234,7 @@ NodeTransitPtr buildScene()
 
 	// FUEL4 TRANSFORM
 	ComponentTransformRecPtr fuel4Trans = ComponentTransform::create();
-    	fuel4Trans->setTranslation(Vec3f(-100.f,0.f,-400.f));
+    fuel4Trans->setTranslation(Vec3f(-100.f,0.f,-400.f));
 	fuel4Trans->setRotation(Quaternion(Vec3f(1.f,0.f,0.f),osgDegree2Rad(90)));
 	fuel4Trans->setScale(Vec3f(2.f,2.f,2.f));
 
@@ -281,9 +286,47 @@ NodeTransitPtr buildScene()
 
 	root->addChild(moonTransNode);
 
-	// WINNING TEAPOT - GREEN
+	// ------------------ WINNING TEAPOT - GREEN ------------------
+	SimpleMaterialRecPtr winTeapotMat = SimpleMaterial::create();
 
-	// LOSING TEAPOT - RED
+	winTeapotMat->setDiffuse(Color3f(0.f,0.9f,0.2f));
+	winTeapotMat->setAmbient(Color3f(0.f, 0.5f, 0.1f));
+	winTeapotMat->setTransparency(0);
+	//winTeapotMat->setLit(true);
+
+	NodeRecPtr winTeapot = makeTeapot(8.f,8.f);;
+
+	ComponentTransformRecPtr winTeapotTrans = ComponentTransform::create();
+	winTeapotTrans->setTranslation(Vec3f(0.f,0.f,10000.f));
+	winTeapotTrans->setScale(Vec3f(5.f,5.f,5.f));
+	
+	winTeapotTransNode = makeNodeFor(winTeapotTrans);
+	winTeapotTransNode->addChild(winTeapot);
+
+	root->addChild(winTeapotTransNode);
+	GeometryRecPtr winTeapotGeo = dynamic_cast<Geometry*>(winTeapot->getCore());
+	winTeapotGeo->setMaterial(winTeapotMat);
+
+	// ------------------ LOSING TEAPOT - RED ------------------
+	SimpleMaterialRecPtr lostTeapotMat = SimpleMaterial::create();
+
+	lostTeapotMat->setDiffuse(Color3f(0.8f,0.2f,0.2f));
+	lostTeapotMat->setAmbient(Color3f(0.5f, 0.1f, 0.1f));
+	lostTeapotMat->setTransparency(0);
+	//lostTeapotMat->setLit(true);
+
+	NodeRecPtr lostTeapot = makeTeapot(8.f,8.f);;
+
+	ComponentTransformRecPtr lostTeapotTrans = ComponentTransform::create();
+	lostTeapotTrans->setTranslation(Vec3f(0.f,0.f,10000.f));
+	lostTeapotTrans->setScale(Vec3f(5.f,5.f,5.f));
+	
+	lostTeapotTransNode = makeNodeFor(lostTeapotTrans);
+	lostTeapotTransNode->addChild(lostTeapot);
+
+	root->addChild(lostTeapotTransNode);
+	GeometryRecPtr lostTeapotGeo = dynamic_cast<Geometry*>(lostTeapot->getCore());
+	lostTeapotGeo->setMaterial(lostTeapotMat);
 
 	return NodeTransitPtr(root);
 }
@@ -520,6 +563,18 @@ void resetScene(void)
 
         // PLAYER POSITION RESET
     	mgr->setTranslation(Vec3f(0.f,0.f,0.f));
+		
+		
+		// RESET TEAPOTS
+		// winTeapotTransNode
+		ComponentTransformRecPtr winTeapotDynTrans = dynamic_cast<ComponentTransform*>(winTeapotTransNode->getCore());
+		winTeapotDynTrans->setTranslation(Vec3f(0.f,0.f,385000.f));
+
+		// lostTeapotTransNode
+		ComponentTransformRecPtr lostTeapotDynTrans = dynamic_cast<ComponentTransform*>(lostTeapotTransNode->getCore());
+		lostTeapotDynTrans->setTranslation(Vec3f(0.f,0.f,385000.f));
+
+		isReset = true;
 }
 
 // COLLISION - PLAYER WITH OBJECTS
@@ -633,35 +688,52 @@ void idle(void)
 	
 	if(height < 0)
 	{
+		if(isReset)
+		{
+			startResetCounter = std::chrono::high_resolution_clock::now();
+		}
+
 		mgr->setUserTransform(head_position, head_orientation);
-    		mgr->setTranslation(mgr->getTranslation() + speed * analog_values);
+    	mgr->setTranslation(mgr->getTranslation() + speed * analog_values);
 		
-		auto startResetCounter = std::chrono::high_resolution_clock::now();
+		Vec3f movementNearPlayer = Vec3f(0.f,0.f,-400.f);
+
+		if(isReset)
+		{
+			std::cout << "SPEED: " << abs(currentVelocity) * 10000 << std::endl;
+
+			// Check velocity
+			if(abs(currentVelocity) < VELOCITY_THRESHOLD)
+			{
+				// win
+				ComponentTransformRecPtr winTeapotDynTrans = dynamic_cast<ComponentTransform*>(winTeapotTransNode->getCore());
+				winTeapotDynTrans->setTranslation(mgr->getTranslation() + userMovement + movementNearPlayer);
+				winTeapotDynTrans->setRotation(Quaternion(Vec3f(1,0,0), osgDegree2Rad(270)));
+			}
+			else
+			{
+				// lose
+				ComponentTransformRecPtr lostTeapotDynTrans = dynamic_cast<ComponentTransform*>(lostTeapotTransNode->getCore());
+				lostTeapotDynTrans->setTranslation(mgr->getTranslation() + userMovement + movementNearPlayer);
+				lostTeapotDynTrans->setRotation(Quaternion(Vec3f(1,0,0), osgDegree2Rad(270)));
+			}
+			isReset = false;
+		}
 		
-		// Check velocity
-		if(abs(currentVelocity) < VELOCITY_THRESHOLD)
-		{
-			// win
-		}
-		else
-		{
-			// lose
-		}
 		
 		auto endResetcounter = std::chrono::high_resolution_clock::now();
-		
-		while((endResetcounter - startResetCounter).count() < RESET_COUNTDOWN)
+
+		if((endResetcounter - startResetCounter).count() > RESET_COUNTDOWN)
 		{
-			endResetcounter = std::chrono::high_resolution_clock::now();
+			resetScene();
+			currentVelocity = 0;
 		}
-		resetScene();
-		currentVelocity = 0;
 	}
 	else
 	{
 		// TRANSFORM AND TRANSLATE
-	    	mgr->setUserTransform(head_position, head_orientation);
-	    	mgr->setTranslation(mgr->getTranslation()  + userMovement + speed * analog_values);
+	    mgr->setUserTransform(head_position, head_orientation);
+	    mgr->setTranslation(mgr->getTranslation()  + userMovement + speed * analog_values);
 		//std::cout << "USER: " << userMovement<< "\n";
 		//std::cout << "MNGR: " << mgr->getTranslation() << "\n";
 		//std::cout << "ANLG: " << analog_values<< "\n";
@@ -791,7 +863,7 @@ int main(int argc, char **argv)
 		//bkg->addLine(Color3f(0.0f, 0.1f, 0.3f), 1);
 
 		mwin->getPort(0)->setBackground(imBkg);
-		mwin->getPort(1)->setBackground(imBkg);
+		/*mwin->getPort(1)->setBackground(imBkg);
 		mwin->getPort(2)->setBackground(imBkg);
 		mwin->getPort(3)->setBackground(imBkg);
 		mwin->getPort(4)->setBackground(imBkg);
@@ -805,7 +877,7 @@ int main(int argc, char **argv)
 		mwin->getPort(12)->setBackground(imBkg);
 		mwin->getPort(13)->setBackground(imBkg);
 		mwin->getPort(14)->setBackground(imBkg);
-		mwin->getPort(15)->setBackground(imBkg);
+		mwin->getPort(15)->setBackground(imBkg);*/
 		// ----------------------------------------------------------------------------------------
 
 		mgr->getWindow()->init();
