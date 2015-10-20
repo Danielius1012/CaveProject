@@ -46,10 +46,10 @@ const float BOOST_VALUE = 2.5f * 1e-3;	// min. 2 , every below is just button sm
 const float GRAVITY_PULL = 1e-12;
 const float VELOCITY_THRESHOLD = 5.f;
 const float MOON_SURFACE = -2000.f;
-const float HEIGHT_START = 1900.f;	// take surface model into account
+const float HEIGHT_START = 1900.f;		// take surface model into account
 const int BOOST_TIME_THRESHOLD = 1e9;	// 1 billion nanoseconds = 1s
 const int RESET_COUNTDOWN = 5 * 1e9;	// first number = seconds on the moon
-const int FUEL_AMOUNT = 100;
+const int FUEL_AMOUNT = 100;			// The lower, the harder the game will be
 
 // USER
 CollidingObject playerCollider = CollidingObject("Player", Vec3f(0.f,0.f,0.f), 2.f); 
@@ -113,6 +113,25 @@ void cleanup()
 
 void print_tracker();
 
+void addCollisionVolumes(void)
+{
+	CollidingObject* fuel1Collider = new CollidingObject("Fuel1", Vec3f(-100.f,0.f,-400.f), 100.f); 
+	CollidingObject* fuel2Collider = new CollidingObject("Fuel2", Vec3f(100.f,-200.f,-600.f), 100.f); 
+	CollidingObject* fuel3Collider = new CollidingObject("Fuel3", Vec3f(200.f,-600.f,-400.f), 100.f); 
+	CollidingObject* fuel4Collider = new CollidingObject("Fuel4", Vec3f(-200.f,-800.f,-200.f), 100.f); 
+
+	objectList.push_front(fuel4Collider);
+	objectList.push_front(fuel3Collider);
+	objectList.push_front(fuel2Collider);
+	objectList.push_front(fuel1Collider);
+
+	// ADD NODES TO SCENE
+	root->addChild(fuel1TransNode);
+	root->addChild(fuel2TransNode);
+	root->addChild(fuel3TransNode);
+	root->addChild(fuel4TransNode);
+}
+
 /// -------------------------------------------------------------------------------------------------------
 /// ------------------------------------------- BUILD SCENE -----------------------------------------------
 /// -------------------------------------------------------------------------------------------------------
@@ -129,16 +148,16 @@ NodeTransitPtr buildScene()
 
 	// FUEL 1
 	//NodeRecPtr fuel1 = SceneFileHandler::the()->read("models/fuel.3DS");
-	NodeRecPtr fuel1 = makeBox(30,30,30,10,10,10);
+	NodeRecPtr fuel1 = makeSphere(8.f,30.f); 
 
 	// FUEL 2
-	NodeRecPtr fuel2 = makeBox(30,30,30,10,10,10);
+	NodeRecPtr fuel2 = makeSphere(8.f,30);
 
 	// FUEL 3
-	NodeRecPtr fuel3 = makeBox(30,30,30,10,10,10);
+	NodeRecPtr fuel3 = makeSphere(8.f,30);
 
 	// FUEL 4
-	NodeRecPtr fuel4 = makeBox(30,30,30,10,10,10);
+	NodeRecPtr fuel4 = makeSphere(8.f,30);
 	// ----------------------------------------------------------------------------------------------------
 
 	// ------------------------------------- TRANSFORMATION SETUP -----------------------------------------
@@ -250,21 +269,7 @@ NodeTransitPtr buildScene()
 	// LANDING STRIP
 
 	// ADD COLLISION VOLUMES TO NODES
-	CollidingObject* fuel1Collider = new CollidingObject("Fuel1", Vec3f(-100.f,0.f,-400.f), 300.f); 
-	CollidingObject* fuel2Collider = new CollidingObject("Fuel2", Vec3f(100.f,-200.f,-600.f), 300.f); 
-	CollidingObject* fuel3Collider = new CollidingObject("Fuel3", Vec3f(200.f,-600.f,-400.f), 300.f); 
-	CollidingObject* fuel4Collider = new CollidingObject("Fuel4", Vec3f(-200.f,-800.f,-200.f), 300.f); 
-
-	objectList.push_front(fuel4Collider);
-	objectList.push_front(fuel3Collider);
-	objectList.push_front(fuel2Collider);
-	objectList.push_front(fuel1Collider);
-
-	// ADD NODES TO SCENE
-	root->addChild(fuel1TransNode);
-	root->addChild(fuel2TransNode);
-	root->addChild(fuel3TransNode);
-	root->addChild(fuel4TransNode);
+	addCollisionVolumes();
 
 	// ----------------------------------------------------------------------------------------------------
 
@@ -335,8 +340,6 @@ NodeTransitPtr buildScene()
 	GeometryRecPtr lostTeapotGeo = dynamic_cast<Geometry*>(lostTeapot->getCore());
 	lostTeapotGeo->setMaterial(lostTeapotMat);
 
-	return NodeTransitPtr(root);
-
 	// LANDING STRIP
 	SimpleMaterialRecPtr landingStripMat = SimpleMaterial::create();
 
@@ -358,6 +361,22 @@ NodeTransitPtr buildScene()
 	GeometryRecPtr landingStripGeo = dynamic_cast<Geometry*>(landingStrip->getCore());
 	landingStripGeo->setMaterial(landingStripMat);
 
+	// Add color to spheres
+	SimpleMaterialRecPtr sphereMat = SimpleMaterial::create();
+
+	sphereMat->setDiffuse(Color3f(0.f,0.8f,1.f));
+	sphereMat->setAmbient(Color3f(0.f, 0.4f, 0.5f));
+	//sphereMat->setTransparency(0.25);
+
+	GeometryRecPtr fuel1Geo = dynamic_cast<Geometry*>(fuel1->getCore());
+	GeometryRecPtr fuel2Geo = dynamic_cast<Geometry*>(fuel2->getCore());
+	GeometryRecPtr fuel3Geo = dynamic_cast<Geometry*>(fuel3->getCore());
+	GeometryRecPtr fuel4Geo = dynamic_cast<Geometry*>(fuel4->getCore());
+	fuel1Geo->setMaterial(sphereMat);
+	fuel2Geo->setMaterial(sphereMat);
+	fuel3Geo->setMaterial(sphereMat);
+	fuel4Geo->setMaterial(sphereMat);
+
 	return NodeTransitPtr(root);
 }
 
@@ -370,14 +389,13 @@ void activateBoost(void)
 	{
             if(fuel > 0)
             {
-		std::cout << "--------------------------- BOOST --------------------------" 
-			<< "\nTIME: " << (boostCurrentTime - boostStartTime).count()
-			<< "\nFUEL: " << fuel  
-			<< "\n------------------------------------------------------------\n";                
-		currentVelocity += BOOST_VALUE;
+				std::cout << "--------------------------- BOOST --------------------------" 
+					<< "\nTIME: " << (boostCurrentTime - boostStartTime).count()
+					<< "\nFUEL: " << fuel  
+					<< "\n------------------------------------------------------------\n";                
+				currentVelocity += BOOST_VALUE;
                 fuel -= 5;
                 boostStartTime = boostCurrentTime;
-		
             }
 	}
 }
@@ -575,7 +593,7 @@ void resetScene(void)
 
         // OBJECTS
         objectRotationValue = 0.f;
-        objectList;
+		objectList.clear();
 
         // Trasformable Objects
 
@@ -593,6 +611,9 @@ void resetScene(void)
 
         // PLAYER POSITION RESET
     	mgr->setTranslation(Vec3f(0.f,0.f,0.f));
+
+		// Add collision volumes
+		addCollisionVolumes();
 		
 		
 	// RESET TEAPOTS
@@ -611,17 +632,16 @@ void resetScene(void)
 void checkCollision(void)
 {
 	// update collision Object based on player 
-	playerCollider = CollidingObject("Player", head_position + userMovement, 200.f);
+	playerCollider = CollidingObject("Player", mgr->getTranslation() + userMovement, 100.f);
 
 	// For every object in the objectList
 	for (std::list<CollidingObject*>::iterator obj = objectList.begin(); obj != objectList.end(); )
 	{
-		//std::cout << "CATEGORY: " << (*obj)->getCategory()	<< std::endl;
 		// If colliding, check for category
 		if(playerCollider.isColliding(**obj))
 		{
 			char* cat = (*obj)->getCategory();
-			std::cout << "CAT: " << cat << std::endl;
+			// std::cout << "CAT: " << cat << std::endl;
 
 			// Check for Category - Fuel or Moon
 			if(cat == "Fuel1")
@@ -630,10 +650,10 @@ void checkCollision(void)
 				fuel += FUEL_AMOUNT;
 
 				// Remove object from root
-				root->subChild(fuel1TransNode);
+				// root->subChild(fuel1TransNode);
 				delete (*obj);
 				obj = objectList.erase(obj);
-				std::cout << "FUEL 1 Killed!" << std::endl;
+				std::cout << "------- FUEL 1 Picked up! -------" << std::endl;
 			}
 			else if(cat == "Fuel2")
 			{
@@ -641,10 +661,10 @@ void checkCollision(void)
 				fuel += FUEL_AMOUNT;
 
 				// Remove object from root
-				root->subChild(fuel2TransNode);
+				// root->subChild(fuel2TransNode);
 				delete (*obj);
 				obj = objectList.erase(obj);
-				std::cout << "FUEL 2 Killed!" << std::endl;
+				std::cout << "------- FUEL 2 Picked up! -------" << std::endl;
 			}
 			else if(cat == "Fuel3")
 			{
@@ -652,10 +672,10 @@ void checkCollision(void)
 				fuel += FUEL_AMOUNT;
 
 				// Remove object from root
-				root->subChild(fuel3TransNode);
+				// root->subChild(fuel3TransNode);
 				delete (*obj);
 				obj = objectList.erase(obj);
-				std::cout << "FUEL 3 Killed!" << std::endl;
+				std::cout << "------- FUEL 3 Picked up! -------" << std::endl;
 			}
 			else if(cat == "Fuel4")
 			{
@@ -663,10 +683,10 @@ void checkCollision(void)
 				fuel += FUEL_AMOUNT;
 
 				// Remove object from root
-				root->subChild(fuel4TransNode);
+				// root->subChild(fuel4TransNode);
 				delete (*obj);
 				obj = objectList.erase(obj);
-				std::cout << "FUEL 4 Killed!" << std::endl;
+				std::cout << "------- FUEL 4 Picked up! -------" << std::endl;
 			}
 			else
 			{	
@@ -691,7 +711,7 @@ void update(void)
 
 	// Calculate Gravity and apply to velocity
 	if(justStarted)
-    	{
+    {
 		justStarted = false;
 		currentVelocity = 0;
 		startTime = currentTime;
@@ -724,8 +744,6 @@ void idle(void)
 	const auto speed = 1.f;
 
 	update();
-	
-	std::cout << "C_V: " <<  currentVelocity * 1000.f << std::endl;
 	
 	if(height < 0)
 	{
