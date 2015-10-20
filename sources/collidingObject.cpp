@@ -56,23 +56,9 @@ bool CollidingObject::isColliding(CollidingObject otherObject)
 	OSG::Vec3f thisPos = this->getPosition();
 	OSG::Vec3f objectPos = otherObject.getPosition();
 
-	float objectX = objectPos.x();
-	float objectY = objectPos.y();
-	float objectZ = objectPos.z();
-
-	float minX, maxX = thisPos.x();
-	float minY, maxY = thisPos.y();
-	float minZ, maxZ = thisPos.z(); 
-	minX -= r;
-	maxX += r;
-	minY -= r;
-	maxY += r;
-	minZ -= r;
-	maxZ += r;
-
-	bool testX = objectX > minX && objectX < maxX;
-	bool testY = objectY > minY && objectY < maxY;
-	bool testZ = objectZ > minZ && objectZ < maxZ;
+	bool testX = objectPos.x() > (thisPos.x() - r) && objectPos.x() < (thisPos.x() + r);
+	bool testY = objectPos.y() > (thisPos.y() - r) && objectPos.y() < (thisPos.y() + r);
+	bool testZ = objectPos.z() > (thisPos.z() - r) && objectPos.z() < (thisPos.z() + r);
 
 	if(testX && testY && testZ)
 		return true;

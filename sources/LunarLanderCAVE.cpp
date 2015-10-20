@@ -42,13 +42,13 @@ NodeRecPtr root;
 //Skybox skybox;                        // scene surroundings
 
 // MOVEMENT VALUES
-const float BOOST_VALUE = .01f;
+const float BOOST_VALUE = 2.5f * 1e-3;	// min. 2 , every below is just button smashing
 const float GRAVITY_PULL = 1e-12;
-const float VELOCITY_THRESHOLD = 1 * 1e-4;
-const float MOON_SURFACE = -1000.f;
-const float HEIGHT_START = 900.f;	// take surface model into account
+const float VELOCITY_THRESHOLD = 5.f;
+const float MOON_SURFACE = -2000.f;
+const float HEIGHT_START = 1900.f;	// take surface model into account
 const int BOOST_TIME_THRESHOLD = 1e9;	// 1 billion nanoseconds = 1s
-const int RESET_COUNTDOWN = 5 * 1e7;	// first number = seconds on the moon
+const int RESET_COUNTDOWN = 5 * 1e9;	// first number = seconds on the moon
 const int FUEL_AMOUNT = 100;
 
 // USER
@@ -78,7 +78,9 @@ int fuel = FUEL_AMOUNT;
 float objectRotationValue = 0.f;
 std::list<CollidingObject*> objectList; 
 bool isReset = true;
+bool justStarted = true;
 auto startResetCounter = std::chrono::high_resolution_clock::now();
+
 
 // Trasformable Objects
 
@@ -97,6 +99,9 @@ NodeRecPtr moonTransNode;
 // TEAPOTS
 NodeRecPtr winTeapotTransNode;
 NodeRecPtr lostTeapotTransNode;
+
+// LANDING
+NodeRecPtr landingStripTransNode;
 
 void cleanup()
 {
@@ -204,7 +209,7 @@ NodeTransitPtr buildScene()
 
 	// FUEL1 TRANSFORM
 	ComponentTransformRecPtr fuel1Trans = ComponentTransform::create();
-    fuel1Trans->setTranslation(Vec3f(-100.f,0.f,-400.f));
+    fuel1Trans->setTranslation(Vec3f(-200.f,0.f,-500.f));
 	fuel1Trans->setRotation(Quaternion(Vec3f(1.f,0.f,0.f),osgDegree2Rad(90)));
 	fuel1Trans->setScale(Vec3f(2.f,2.f,2.f));
 
@@ -214,7 +219,7 @@ NodeTransitPtr buildScene()
 
 	// FUEL2 TRANSFORM
 	ComponentTransformRecPtr fuel2Trans = ComponentTransform::create();
-    fuel2Trans->setTranslation(Vec3f(100.f,-200.f,-600.f));
+    fuel2Trans->setTranslation(Vec3f(200.f,-400.f,-600.f));
 	fuel2Trans->setRotation(Quaternion(Vec3f(1.f,0.f,0.f),osgDegree2Rad(90)));
 	fuel2Trans->setScale(Vec3f(2.f,2.f,2.f));
 
@@ -224,7 +229,7 @@ NodeTransitPtr buildScene()
 
 	// FUEL3 TRANSFORM
 	ComponentTransformRecPtr fuel3Trans = ComponentTransform::create();
-    fuel3Trans->setTranslation(Vec3f(200.f,-600.f,-400.f));
+    fuel3Trans->setTranslation(Vec3f(300.f,-1200.f,-500.f));
 	fuel3Trans->setRotation(Quaternion(Vec3f(1.f,0.f,0.f),osgDegree2Rad(90)));
 	fuel3Trans->setScale(Vec3f(2.f,2.f,2.f));
 
@@ -234,13 +239,15 @@ NodeTransitPtr buildScene()
 
 	// FUEL4 TRANSFORM
 	ComponentTransformRecPtr fuel4Trans = ComponentTransform::create();
-    fuel4Trans->setTranslation(Vec3f(-100.f,0.f,-400.f));
+    	fuel4Trans->setTranslation(Vec3f(-200.f,-1600.f,-200.f));
 	fuel4Trans->setRotation(Quaternion(Vec3f(1.f,0.f,0.f),osgDegree2Rad(90)));
 	fuel4Trans->setScale(Vec3f(2.f,2.f,2.f));
 
 	fuel4TransNode = Node::create();
 	fuel4TransNode->setCore(fuel4Trans);
 	fuel4TransNode->addChild(fuel4);
+
+	// LANDING STRIP
 
 	// ADD COLLISION VOLUMES TO NODES
 	CollidingObject* fuel1Collider = new CollidingObject("Fuel1", Vec3f(-100.f,0.f,-400.f), 300.f); 
@@ -278,7 +285,7 @@ NodeTransitPtr buildScene()
 	NodeRecPtr moonSurface = SceneFileHandler::the()->read("models/moon.3DS");
 
 	ComponentTransformRecPtr moonTrans = ComponentTransform::create();
-	moonTrans->setTranslation(Vec3f(1000.f,-1000.f,-1000.f));
+	moonTrans->setTranslation(Vec3f(1000.f,-2000.f,-1000.f));
 	moonTrans->setScale(Vec3f(1000.f,1.f,1000.f));
 	
 	moonTransNode = makeNodeFor(moonTrans);
@@ -329,6 +336,29 @@ NodeTransitPtr buildScene()
 	lostTeapotGeo->setMaterial(lostTeapotMat);
 
 	return NodeTransitPtr(root);
+
+	// LANDING STRIP
+	SimpleMaterialRecPtr landingStripMat = SimpleMaterial::create();
+
+	landingStripMat->setDiffuse(Color3f(1.f,1.f,1.f));
+	landingStripMat->setAmbient(Color3f(0.5f, 0.5f, 0.5f));
+	landingStripMat->setTransparency(0);
+	//landingStripMat->setLit(true);
+
+	NodeRecPtr landingStrip = makeBox(50,1,50,10,10,10);;
+
+	ComponentTransformRecPtr landingStripTrans = ComponentTransform::create();
+	landingStripTrans->setTranslation(Vec3f(0.f,-1900.f,0.f));
+	landingStripTrans->setScale(Vec3f(5.f,5.f,5.f));
+	
+	landingStripTransNode = makeNodeFor(landingStripTrans);
+	landingStripTransNode->addChild(landingStrip);
+
+	root->addChild(landingStripTransNode);
+	GeometryRecPtr landingStripGeo = dynamic_cast<Geometry*>(landingStrip->getCore());
+	landingStripGeo->setMaterial(landingStripMat);
+
+	return NodeTransitPtr(root);
 }
 
 void activateBoost(void)
@@ -344,7 +374,7 @@ void activateBoost(void)
 			<< "\nTIME: " << (boostCurrentTime - boostStartTime).count()
 			<< "\nFUEL: " << fuel  
 			<< "\n------------------------------------------------------------\n";                
-		currentVelocity = BOOST_VALUE;
+		currentVelocity += BOOST_VALUE;
                 fuel -= 5;
                 boostStartTime = boostCurrentTime;
 		
@@ -435,24 +465,24 @@ void objectMotion()
 
 	// Transform Fuel 1
 	ComponentTransformRecPtr fuel1DynTrans = dynamic_cast<ComponentTransform*>(fuel1TransNode->getCore());
-    fuel1DynTrans->setRotation(fuelRotation);
+    	fuel1DynTrans->setRotation(fuelRotation);
 	
 	// Transform Fuel 2
 	ComponentTransformRecPtr fuel2DynTrans = dynamic_cast<ComponentTransform*>(fuel2TransNode->getCore());
-    fuel2DynTrans->setRotation(fuelRotation);
+    	fuel2DynTrans->setRotation(fuelRotation);
 
 	// Transform Fuel 3
 	ComponentTransformRecPtr fuel3DynTrans = dynamic_cast<ComponentTransform*>(fuel3TransNode->getCore());
-    fuel3DynTrans->setRotation(fuelRotation);
+    	fuel3DynTrans->setRotation(fuelRotation);
 
 	// Transform Fuel 4
 	ComponentTransformRecPtr fuel4DynTrans = dynamic_cast<ComponentTransform*>(fuel4TransNode->getCore());
-    fuel4DynTrans->setRotation(fuelRotation);
+    	fuel4DynTrans->setRotation(fuelRotation);
 
-    // Rotate Earth
+    	// Rotate Earth
 	ComponentTransformRecPtr earthDynTrans = dynamic_cast<ComponentTransform*>(earthTransNode->getCore());
-    earthDynTrans->setRotation(Quaternion(Vec3f(0,1,1), osgDegree2Rad(90) + objectRotationValue));
-    earthDynTrans->setTranslation(Vec3f(100000.f,mgr->getTranslation().y() + 100000.f,-385000.f));
+    	earthDynTrans->setRotation(Quaternion(Vec3f(0,1,1), osgDegree2Rad(90) + objectRotationValue));
+    	earthDynTrans->setTranslation(Vec3f(100000.f,mgr->getTranslation().y() + 100000.f,-385000.f));
 
       	// EXAMPLES:
 	//bt->setTranslation(Vec3f(10,5,0));
@@ -565,16 +595,16 @@ void resetScene(void)
     	mgr->setTranslation(Vec3f(0.f,0.f,0.f));
 		
 		
-		// RESET TEAPOTS
-		// winTeapotTransNode
-		ComponentTransformRecPtr winTeapotDynTrans = dynamic_cast<ComponentTransform*>(winTeapotTransNode->getCore());
-		winTeapotDynTrans->setTranslation(Vec3f(0.f,0.f,385000.f));
+	// RESET TEAPOTS
+	// winTeapotTransNode
+	ComponentTransformRecPtr winTeapotDynTrans = dynamic_cast<ComponentTransform*>(winTeapotTransNode->getCore());
+	winTeapotDynTrans->setTranslation(Vec3f(0.f,0.f,385000.f));
 
-		// lostTeapotTransNode
-		ComponentTransformRecPtr lostTeapotDynTrans = dynamic_cast<ComponentTransform*>(lostTeapotTransNode->getCore());
-		lostTeapotDynTrans->setTranslation(Vec3f(0.f,0.f,385000.f));
+	// lostTeapotTransNode
+	ComponentTransformRecPtr lostTeapotDynTrans = dynamic_cast<ComponentTransform*>(lostTeapotTransNode->getCore());
+	lostTeapotDynTrans->setTranslation(Vec3f(0.f,0.f,385000.f));
 
-		isReset = true;
+	isReset = true;
 }
 
 // COLLISION - PLAYER WITH OBJECTS
@@ -660,8 +690,17 @@ void update(void)
 	auto difference = currentTime - startTime;
 
 	// Calculate Gravity and apply to velocity
-    	currentVelocity -= GRAVITY_PULL * difference.count();
-	startTime = currentTime;
+	if(justStarted)
+    	{
+		justStarted = false;
+		currentVelocity = 0;
+		startTime = currentTime;
+	}
+	else
+	{
+		currentVelocity -= GRAVITY_PULL * difference.count();
+		startTime = currentTime;
+	}
 
     	// APPLY FORCES
 	userMovement += Vec3f(0.f ,currentVelocity, 0.f);
@@ -686,6 +725,8 @@ void idle(void)
 
 	update();
 	
+	std::cout << "C_V: " <<  currentVelocity * 1000.f << std::endl;
+	
 	if(height < 0)
 	{
 		if(isReset)
@@ -694,16 +735,16 @@ void idle(void)
 		}
 
 		mgr->setUserTransform(head_position, head_orientation);
-    	mgr->setTranslation(mgr->getTranslation() + speed * analog_values);
+    		mgr->setTranslation(mgr->getTranslation() + speed * analog_values);
 		
 		Vec3f movementNearPlayer = Vec3f(0.f,0.f,-400.f);
 
 		if(isReset)
 		{
-			std::cout << "SPEED: " << abs(currentVelocity) * 10000 << std::endl;
+			std::cout << "SPEED: " << abs(currentVelocity) * 1000.f << std::endl;
 
 			// Check velocity
-			if(abs(currentVelocity) < VELOCITY_THRESHOLD)
+			if(abs(currentVelocity * 1000.f) < VELOCITY_THRESHOLD)
 			{
 				// win
 				ComponentTransformRecPtr winTeapotDynTrans = dynamic_cast<ComponentTransform*>(winTeapotTransNode->getCore());
@@ -732,8 +773,8 @@ void idle(void)
 	else
 	{
 		// TRANSFORM AND TRANSLATE
-	    mgr->setUserTransform(head_position, head_orientation);
-	    mgr->setTranslation(mgr->getTranslation()  + userMovement + speed * analog_values);
+		mgr->setUserTransform(head_position, head_orientation);
+		mgr->setTranslation(mgr->getTranslation()  + userMovement + speed * analog_values);
 		//std::cout << "USER: " << userMovement<< "\n";
 		//std::cout << "MNGR: " << mgr->getTranslation() << "\n";
 		//std::cout << "ANLG: " << analog_values<< "\n";
@@ -837,7 +878,9 @@ int main(int argc, char **argv)
 		MultiDisplayWindowRefPtr mwin = createAppWindow(cfg, cfg.getBroadcastaddress());
 
 		if (!scene) 
-			scene = buildScene();
+		{
+			scene = buildScene();	
+		}
 		commitChanges();
 
 		mgr = new OSGCSM::CAVESceneManager(&cfg);
@@ -863,7 +906,7 @@ int main(int argc, char **argv)
 		//bkg->addLine(Color3f(0.0f, 0.1f, 0.3f), 1);
 
 		mwin->getPort(0)->setBackground(imBkg);
-		/*mwin->getPort(1)->setBackground(imBkg);
+		mwin->getPort(1)->setBackground(imBkg);
 		mwin->getPort(2)->setBackground(imBkg);
 		mwin->getPort(3)->setBackground(imBkg);
 		mwin->getPort(4)->setBackground(imBkg);
@@ -877,7 +920,7 @@ int main(int argc, char **argv)
 		mwin->getPort(12)->setBackground(imBkg);
 		mwin->getPort(13)->setBackground(imBkg);
 		mwin->getPort(14)->setBackground(imBkg);
-		mwin->getPort(15)->setBackground(imBkg);*/
+		mwin->getPort(15)->setBackground(imBkg);
 		// ----------------------------------------------------------------------------------------
 
 		mgr->getWindow()->init();
