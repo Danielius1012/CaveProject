@@ -28,30 +28,30 @@ The CXX compiler identification is GNU, found in "/home/ga78ced/student_project/
 Determining if the C compiler works passed with the following output:
 Change Dir: /home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/gmake" "cmTryCompileExec4020479775/fast"
-/usr/bin/gmake -f CMakeFiles/cmTryCompileExec4020479775.dir/build.make CMakeFiles/cmTryCompileExec4020479775.dir/build
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec4004003950/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec4004003950.dir/build.make CMakeFiles/cmTryCompileExec4004003950.dir/build
 gmake[1]: Entering directory `/home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp'
 /sw/cmake/3.2.3/bin/cmake -E cmake_progress_report /home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building C object CMakeFiles/cmTryCompileExec4020479775.dir/testCCompiler.c.o
-/lrz/sys/compilers/gcc/5.1.0/bin/gcc    -o CMakeFiles/cmTryCompileExec4020479775.dir/testCCompiler.c.o   -c /home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp/testCCompiler.c
-Linking C executable cmTryCompileExec4020479775
-/sw/cmake/3.2.3/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec4020479775.dir/link.txt --verbose=1
-/lrz/sys/compilers/gcc/5.1.0/bin/gcc       CMakeFiles/cmTryCompileExec4020479775.dir/testCCompiler.c.o  -o cmTryCompileExec4020479775 -rdynamic 
+Building C object CMakeFiles/cmTryCompileExec4004003950.dir/testCCompiler.c.o
+/lrz/sys/compilers/gcc/5.1.0/bin/gcc    -o CMakeFiles/cmTryCompileExec4004003950.dir/testCCompiler.c.o   -c /home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTryCompileExec4004003950
+/sw/cmake/3.2.3/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec4004003950.dir/link.txt --verbose=1
+/lrz/sys/compilers/gcc/5.1.0/bin/gcc       CMakeFiles/cmTryCompileExec4004003950.dir/testCCompiler.c.o  -o cmTryCompileExec4004003950 -rdynamic 
 gmake[1]: Leaving directory `/home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp'
 
 
 Detecting C compiler ABI info compiled with the following output:
 Change Dir: /home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/gmake" "cmTryCompileExec884809573/fast"
-/usr/bin/gmake -f CMakeFiles/cmTryCompileExec884809573.dir/build.make CMakeFiles/cmTryCompileExec884809573.dir/build
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec3874384124/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3874384124.dir/build.make CMakeFiles/cmTryCompileExec3874384124.dir/build
 gmake[1]: Entering directory `/home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp'
 /sw/cmake/3.2.3/bin/cmake -E cmake_progress_report /home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building C object CMakeFiles/cmTryCompileExec884809573.dir/CMakeCCompilerABI.c.o
-/lrz/sys/compilers/gcc/5.1.0/bin/gcc    -o CMakeFiles/cmTryCompileExec884809573.dir/CMakeCCompilerABI.c.o   -c /sw/cmake/3.2.3/share/cmake-3.2/Modules/CMakeCCompilerABI.c
-Linking C executable cmTryCompileExec884809573
-/sw/cmake/3.2.3/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec884809573.dir/link.txt --verbose=1
-/lrz/sys/compilers/gcc/5.1.0/bin/gcc      -v CMakeFiles/cmTryCompileExec884809573.dir/CMakeCCompilerABI.c.o  -o cmTryCompileExec884809573 -rdynamic  
+Building C object CMakeFiles/cmTryCompileExec3874384124.dir/CMakeCCompilerABI.c.o
+/lrz/sys/compilers/gcc/5.1.0/bin/gcc    -o CMakeFiles/cmTryCompileExec3874384124.dir/CMakeCCompilerABI.c.o   -c /sw/cmake/3.2.3/share/cmake-3.2/Modules/CMakeCCompilerABI.c
+Linking C executable cmTryCompileExec3874384124
+/sw/cmake/3.2.3/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3874384124.dir/link.txt --verbose=1
+/lrz/sys/compilers/gcc/5.1.0/bin/gcc      -v CMakeFiles/cmTryCompileExec3874384124.dir/CMakeCCompilerABI.c.o  -o cmTryCompileExec3874384124 -rdynamic  
 Using built-in specs.
 COLLECT_GCC=/lrz/sys/compilers/gcc/5.1.0/bin/gcc
 COLLECT_LTO_WRAPPER=/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/lto-wrapper
@@ -61,8 +61,8 @@ Thread model: posix
 gcc version 5.1.0 (GCC) 
 COMPILER_PATH=/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/:/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/
 LIBRARY_PATH=/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/:/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/:/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec884809573' '-rdynamic' '-mtune=generic' '-march=x86-64'
- /lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/collect2 -plugin /lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/liblto_plugin.so -plugin-opt=/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ga78ced/cconYeGh.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTryCompileExec884809573 /usr/lib/../lib64/crt1.o /usr/lib/../lib64/crti.o /lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/crtbegin.o -L/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0 -L/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc -L/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/../../.. CMakeFiles/cmTryCompileExec884809573.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/crtend.o /usr/lib/../lib64/crtn.o
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec3874384124' '-rdynamic' '-mtune=generic' '-march=x86-64'
+ /lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/collect2 -plugin /lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/liblto_plugin.so -plugin-opt=/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ga78ced/cckSi7g7.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTryCompileExec3874384124 /usr/lib/../lib64/crt1.o /usr/lib/../lib64/crti.o /lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/crtbegin.o -L/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0 -L/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc -L/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/../../.. CMakeFiles/cmTryCompileExec3874384124.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/crtend.o /usr/lib/../lib64/crtn.o
 gmake[1]: Leaving directory `/home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp'
 
 
@@ -70,15 +70,15 @@ Parsed C implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|([^/\]+-)?ld|collect2)[^/\]*( |$)]
   ignore line: [Change Dir: /home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command:"/usr/bin/gmake" "cmTryCompileExec884809573/fast"]
-  ignore line: [/usr/bin/gmake -f CMakeFiles/cmTryCompileExec884809573.dir/build.make CMakeFiles/cmTryCompileExec884809573.dir/build]
+  ignore line: [Run Build Command:"/usr/bin/gmake" "cmTryCompileExec3874384124/fast"]
+  ignore line: [/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3874384124.dir/build.make CMakeFiles/cmTryCompileExec3874384124.dir/build]
   ignore line: [gmake[1]: Entering directory `/home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp']
   ignore line: [/sw/cmake/3.2.3/bin/cmake -E cmake_progress_report /home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp/CMakeFiles 1]
-  ignore line: [Building C object CMakeFiles/cmTryCompileExec884809573.dir/CMakeCCompilerABI.c.o]
-  ignore line: [/lrz/sys/compilers/gcc/5.1.0/bin/gcc    -o CMakeFiles/cmTryCompileExec884809573.dir/CMakeCCompilerABI.c.o   -c /sw/cmake/3.2.3/share/cmake-3.2/Modules/CMakeCCompilerABI.c]
-  ignore line: [Linking C executable cmTryCompileExec884809573]
-  ignore line: [/sw/cmake/3.2.3/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec884809573.dir/link.txt --verbose=1]
-  ignore line: [/lrz/sys/compilers/gcc/5.1.0/bin/gcc      -v CMakeFiles/cmTryCompileExec884809573.dir/CMakeCCompilerABI.c.o  -o cmTryCompileExec884809573 -rdynamic  ]
+  ignore line: [Building C object CMakeFiles/cmTryCompileExec3874384124.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/lrz/sys/compilers/gcc/5.1.0/bin/gcc    -o CMakeFiles/cmTryCompileExec3874384124.dir/CMakeCCompilerABI.c.o   -c /sw/cmake/3.2.3/share/cmake-3.2/Modules/CMakeCCompilerABI.c]
+  ignore line: [Linking C executable cmTryCompileExec3874384124]
+  ignore line: [/sw/cmake/3.2.3/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3874384124.dir/link.txt --verbose=1]
+  ignore line: [/lrz/sys/compilers/gcc/5.1.0/bin/gcc      -v CMakeFiles/cmTryCompileExec3874384124.dir/CMakeCCompilerABI.c.o  -o cmTryCompileExec3874384124 -rdynamic  ]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=/lrz/sys/compilers/gcc/5.1.0/bin/gcc]
   ignore line: [COLLECT_LTO_WRAPPER=/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/lto-wrapper]
@@ -88,13 +88,13 @@ Parsed C implicit link information from above output:
   ignore line: [gcc version 5.1.0 (GCC) ]
   ignore line: [COMPILER_PATH=/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/:/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/]
   ignore line: [LIBRARY_PATH=/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/:/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/:/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec884809573' '-rdynamic' '-mtune=generic' '-march=x86-64']
-  link line: [ /lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/collect2 -plugin /lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/liblto_plugin.so -plugin-opt=/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ga78ced/cconYeGh.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTryCompileExec884809573 /usr/lib/../lib64/crt1.o /usr/lib/../lib64/crti.o /lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/crtbegin.o -L/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0 -L/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc -L/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/../../.. CMakeFiles/cmTryCompileExec884809573.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/crtend.o /usr/lib/../lib64/crtn.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec3874384124' '-rdynamic' '-mtune=generic' '-march=x86-64']
+  link line: [ /lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/collect2 -plugin /lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/liblto_plugin.so -plugin-opt=/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ga78ced/cckSi7g7.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTryCompileExec3874384124 /usr/lib/../lib64/crt1.o /usr/lib/../lib64/crti.o /lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/crtbegin.o -L/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0 -L/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc -L/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/../../.. CMakeFiles/cmTryCompileExec3874384124.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/crtend.o /usr/lib/../lib64/crtn.o]
     arg [/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/collect2] ==> ignore
     arg [-plugin] ==> ignore
     arg [/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/liblto_plugin.so] ==> ignore
     arg [-plugin-opt=/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/lto-wrapper] ==> ignore
-    arg [-plugin-opt=-fresolution=/tmp/ga78ced/cconYeGh.res] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/ga78ced/cckSi7g7.res] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
     arg [-plugin-opt=-pass-through=-lc] ==> ignore
@@ -107,7 +107,7 @@ Parsed C implicit link information from above output:
     arg [-dynamic-linker] ==> ignore
     arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTryCompileExec884809573] ==> ignore
+    arg [cmTryCompileExec3874384124] ==> ignore
     arg [/usr/lib/../lib64/crt1.o] ==> ignore
     arg [/usr/lib/../lib64/crti.o] ==> ignore
     arg [/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/crtbegin.o] ==> ignore
@@ -117,7 +117,7 @@ Parsed C implicit link information from above output:
     arg [-L/lib/../lib64] ==> dir [/lib/../lib64]
     arg [-L/usr/lib/../lib64] ==> dir [/usr/lib/../lib64]
     arg [-L/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/../../..] ==> dir [/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/../../..]
-    arg [CMakeFiles/cmTryCompileExec884809573.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [CMakeFiles/cmTryCompileExec3874384124.dir/CMakeCCompilerABI.c.o] ==> ignore
     arg [-lgcc] ==> lib [gcc]
     arg [--as-needed] ==> ignore
     arg [-lgcc_s] ==> lib [gcc_s]
@@ -149,15 +149,15 @@ Parsed C implicit link information from above output:
 Detecting C [-std=c11] compiler features compiled with the following output:
 Change Dir: /home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/gmake" "cmTryCompileExec4135666792/fast"
-/usr/bin/gmake -f CMakeFiles/cmTryCompileExec4135666792.dir/build.make CMakeFiles/cmTryCompileExec4135666792.dir/build
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec3703004062/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3703004062.dir/build.make CMakeFiles/cmTryCompileExec3703004062.dir/build
 gmake[1]: Entering directory `/home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp'
 /sw/cmake/3.2.3/bin/cmake -E cmake_progress_report /home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building C object CMakeFiles/cmTryCompileExec4135666792.dir/feature_tests.c.o
-/lrz/sys/compilers/gcc/5.1.0/bin/gcc   -std=c11 -o CMakeFiles/cmTryCompileExec4135666792.dir/feature_tests.c.o   -c /home/ga78ced/student_project/CaveProject/build/CMakeFiles/feature_tests.c
-Linking C executable cmTryCompileExec4135666792
-/sw/cmake/3.2.3/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec4135666792.dir/link.txt --verbose=1
-/lrz/sys/compilers/gcc/5.1.0/bin/gcc       CMakeFiles/cmTryCompileExec4135666792.dir/feature_tests.c.o  -o cmTryCompileExec4135666792 -rdynamic 
+Building C object CMakeFiles/cmTryCompileExec3703004062.dir/feature_tests.c.o
+/lrz/sys/compilers/gcc/5.1.0/bin/gcc   -std=c11 -o CMakeFiles/cmTryCompileExec3703004062.dir/feature_tests.c.o   -c /home/ga78ced/student_project/CaveProject/build/CMakeFiles/feature_tests.c
+Linking C executable cmTryCompileExec3703004062
+/sw/cmake/3.2.3/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3703004062.dir/link.txt --verbose=1
+/lrz/sys/compilers/gcc/5.1.0/bin/gcc       CMakeFiles/cmTryCompileExec3703004062.dir/feature_tests.c.o  -o cmTryCompileExec3703004062 -rdynamic 
 gmake[1]: Leaving directory `/home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp'
 
 
@@ -170,15 +170,15 @@ gmake[1]: Leaving directory `/home/ga78ced/student_project/CaveProject/build/CMa
 Detecting C [-std=c99] compiler features compiled with the following output:
 Change Dir: /home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/gmake" "cmTryCompileExec1114111608/fast"
-/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1114111608.dir/build.make CMakeFiles/cmTryCompileExec1114111608.dir/build
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec3844829015/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3844829015.dir/build.make CMakeFiles/cmTryCompileExec3844829015.dir/build
 gmake[1]: Entering directory `/home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp'
 /sw/cmake/3.2.3/bin/cmake -E cmake_progress_report /home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building C object CMakeFiles/cmTryCompileExec1114111608.dir/feature_tests.c.o
-/lrz/sys/compilers/gcc/5.1.0/bin/gcc   -std=c99 -o CMakeFiles/cmTryCompileExec1114111608.dir/feature_tests.c.o   -c /home/ga78ced/student_project/CaveProject/build/CMakeFiles/feature_tests.c
-Linking C executable cmTryCompileExec1114111608
-/sw/cmake/3.2.3/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1114111608.dir/link.txt --verbose=1
-/lrz/sys/compilers/gcc/5.1.0/bin/gcc       CMakeFiles/cmTryCompileExec1114111608.dir/feature_tests.c.o  -o cmTryCompileExec1114111608 -rdynamic 
+Building C object CMakeFiles/cmTryCompileExec3844829015.dir/feature_tests.c.o
+/lrz/sys/compilers/gcc/5.1.0/bin/gcc   -std=c99 -o CMakeFiles/cmTryCompileExec3844829015.dir/feature_tests.c.o   -c /home/ga78ced/student_project/CaveProject/build/CMakeFiles/feature_tests.c
+Linking C executable cmTryCompileExec3844829015
+/sw/cmake/3.2.3/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3844829015.dir/link.txt --verbose=1
+/lrz/sys/compilers/gcc/5.1.0/bin/gcc       CMakeFiles/cmTryCompileExec3844829015.dir/feature_tests.c.o  -o cmTryCompileExec3844829015 -rdynamic 
 gmake[1]: Leaving directory `/home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp'
 
 
@@ -191,15 +191,15 @@ gmake[1]: Leaving directory `/home/ga78ced/student_project/CaveProject/build/CMa
 Detecting C [-std=c90] compiler features compiled with the following output:
 Change Dir: /home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/gmake" "cmTryCompileExec1489001627/fast"
-/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1489001627.dir/build.make CMakeFiles/cmTryCompileExec1489001627.dir/build
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec2932560843/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec2932560843.dir/build.make CMakeFiles/cmTryCompileExec2932560843.dir/build
 gmake[1]: Entering directory `/home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp'
 /sw/cmake/3.2.3/bin/cmake -E cmake_progress_report /home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building C object CMakeFiles/cmTryCompileExec1489001627.dir/feature_tests.c.o
-/lrz/sys/compilers/gcc/5.1.0/bin/gcc   -std=c90 -o CMakeFiles/cmTryCompileExec1489001627.dir/feature_tests.c.o   -c /home/ga78ced/student_project/CaveProject/build/CMakeFiles/feature_tests.c
-Linking C executable cmTryCompileExec1489001627
-/sw/cmake/3.2.3/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1489001627.dir/link.txt --verbose=1
-/lrz/sys/compilers/gcc/5.1.0/bin/gcc       CMakeFiles/cmTryCompileExec1489001627.dir/feature_tests.c.o  -o cmTryCompileExec1489001627 -rdynamic 
+Building C object CMakeFiles/cmTryCompileExec2932560843.dir/feature_tests.c.o
+/lrz/sys/compilers/gcc/5.1.0/bin/gcc   -std=c90 -o CMakeFiles/cmTryCompileExec2932560843.dir/feature_tests.c.o   -c /home/ga78ced/student_project/CaveProject/build/CMakeFiles/feature_tests.c
+Linking C executable cmTryCompileExec2932560843
+/sw/cmake/3.2.3/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2932560843.dir/link.txt --verbose=1
+/lrz/sys/compilers/gcc/5.1.0/bin/gcc       CMakeFiles/cmTryCompileExec2932560843.dir/feature_tests.c.o  -o cmTryCompileExec2932560843 -rdynamic 
 gmake[1]: Leaving directory `/home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp'
 
 
@@ -210,30 +210,30 @@ gmake[1]: Leaving directory `/home/ga78ced/student_project/CaveProject/build/CMa
 Determining if the CXX compiler works passed with the following output:
 Change Dir: /home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/gmake" "cmTryCompileExec182760091/fast"
-/usr/bin/gmake -f CMakeFiles/cmTryCompileExec182760091.dir/build.make CMakeFiles/cmTryCompileExec182760091.dir/build
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec417725135/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec417725135.dir/build.make CMakeFiles/cmTryCompileExec417725135.dir/build
 gmake[1]: Entering directory `/home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp'
 /sw/cmake/3.2.3/bin/cmake -E cmake_progress_report /home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec182760091.dir/testCXXCompiler.cxx.o
-/lrz/sys/compilers/gcc/5.1.0/bin/g++    -std=c++11    -o CMakeFiles/cmTryCompileExec182760091.dir/testCXXCompiler.cxx.o -c /home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
-Linking CXX executable cmTryCompileExec182760091
-/sw/cmake/3.2.3/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec182760091.dir/link.txt --verbose=1
-/lrz/sys/compilers/gcc/5.1.0/bin/g++   -std=c++11     CMakeFiles/cmTryCompileExec182760091.dir/testCXXCompiler.cxx.o  -o cmTryCompileExec182760091 -rdynamic 
+Building CXX object CMakeFiles/cmTryCompileExec417725135.dir/testCXXCompiler.cxx.o
+/lrz/sys/compilers/gcc/5.1.0/bin/g++    -std=c++11    -o CMakeFiles/cmTryCompileExec417725135.dir/testCXXCompiler.cxx.o -c /home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTryCompileExec417725135
+/sw/cmake/3.2.3/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec417725135.dir/link.txt --verbose=1
+/lrz/sys/compilers/gcc/5.1.0/bin/g++   -std=c++11     CMakeFiles/cmTryCompileExec417725135.dir/testCXXCompiler.cxx.o  -o cmTryCompileExec417725135 -rdynamic 
 gmake[1]: Leaving directory `/home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp'
 
 
 Detecting CXX compiler ABI info compiled with the following output:
 Change Dir: /home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/gmake" "cmTryCompileExec3969374824/fast"
-/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3969374824.dir/build.make CMakeFiles/cmTryCompileExec3969374824.dir/build
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec1260049153/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1260049153.dir/build.make CMakeFiles/cmTryCompileExec1260049153.dir/build
 gmake[1]: Entering directory `/home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp'
 /sw/cmake/3.2.3/bin/cmake -E cmake_progress_report /home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec3969374824.dir/CMakeCXXCompilerABI.cpp.o
-/lrz/sys/compilers/gcc/5.1.0/bin/g++    -std=c++11    -o CMakeFiles/cmTryCompileExec3969374824.dir/CMakeCXXCompilerABI.cpp.o -c /sw/cmake/3.2.3/share/cmake-3.2/Modules/CMakeCXXCompilerABI.cpp
-Linking CXX executable cmTryCompileExec3969374824
-/sw/cmake/3.2.3/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3969374824.dir/link.txt --verbose=1
-/lrz/sys/compilers/gcc/5.1.0/bin/g++   -std=c++11    -v CMakeFiles/cmTryCompileExec3969374824.dir/CMakeCXXCompilerABI.cpp.o  -o cmTryCompileExec3969374824 -rdynamic  
+Building CXX object CMakeFiles/cmTryCompileExec1260049153.dir/CMakeCXXCompilerABI.cpp.o
+/lrz/sys/compilers/gcc/5.1.0/bin/g++    -std=c++11    -o CMakeFiles/cmTryCompileExec1260049153.dir/CMakeCXXCompilerABI.cpp.o -c /sw/cmake/3.2.3/share/cmake-3.2/Modules/CMakeCXXCompilerABI.cpp
+Linking CXX executable cmTryCompileExec1260049153
+/sw/cmake/3.2.3/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1260049153.dir/link.txt --verbose=1
+/lrz/sys/compilers/gcc/5.1.0/bin/g++   -std=c++11    -v CMakeFiles/cmTryCompileExec1260049153.dir/CMakeCXXCompilerABI.cpp.o  -o cmTryCompileExec1260049153 -rdynamic  
 Using built-in specs.
 COLLECT_GCC=/lrz/sys/compilers/gcc/5.1.0/bin/g++
 COLLECT_LTO_WRAPPER=/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/lto-wrapper
@@ -243,8 +243,8 @@ Thread model: posix
 gcc version 5.1.0 (GCC) 
 COMPILER_PATH=/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/:/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/
 LIBRARY_PATH=/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/:/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/:/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-std=c++11' '-v' '-o' 'cmTryCompileExec3969374824' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
- /lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/collect2 -plugin /lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/liblto_plugin.so -plugin-opt=/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ga78ced/ccShyvTB.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTryCompileExec3969374824 /usr/lib/../lib64/crt1.o /usr/lib/../lib64/crti.o /lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/crtbegin.o -L/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0 -L/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc -L/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/../../.. CMakeFiles/cmTryCompileExec3969374824.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/crtend.o /usr/lib/../lib64/crtn.o
+COLLECT_GCC_OPTIONS='-std=c++11' '-v' '-o' 'cmTryCompileExec1260049153' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/collect2 -plugin /lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/liblto_plugin.so -plugin-opt=/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ga78ced/ccXDgYSB.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTryCompileExec1260049153 /usr/lib/../lib64/crt1.o /usr/lib/../lib64/crti.o /lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/crtbegin.o -L/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0 -L/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc -L/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/../../.. CMakeFiles/cmTryCompileExec1260049153.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/crtend.o /usr/lib/../lib64/crtn.o
 gmake[1]: Leaving directory `/home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp'
 
 
@@ -252,15 +252,15 @@ Parsed CXX implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|([^/\]+-)?ld|collect2)[^/\]*( |$)]
   ignore line: [Change Dir: /home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command:"/usr/bin/gmake" "cmTryCompileExec3969374824/fast"]
-  ignore line: [/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3969374824.dir/build.make CMakeFiles/cmTryCompileExec3969374824.dir/build]
+  ignore line: [Run Build Command:"/usr/bin/gmake" "cmTryCompileExec1260049153/fast"]
+  ignore line: [/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1260049153.dir/build.make CMakeFiles/cmTryCompileExec1260049153.dir/build]
   ignore line: [gmake[1]: Entering directory `/home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp']
   ignore line: [/sw/cmake/3.2.3/bin/cmake -E cmake_progress_report /home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp/CMakeFiles 1]
-  ignore line: [Building CXX object CMakeFiles/cmTryCompileExec3969374824.dir/CMakeCXXCompilerABI.cpp.o]
-  ignore line: [/lrz/sys/compilers/gcc/5.1.0/bin/g++    -std=c++11    -o CMakeFiles/cmTryCompileExec3969374824.dir/CMakeCXXCompilerABI.cpp.o -c /sw/cmake/3.2.3/share/cmake-3.2/Modules/CMakeCXXCompilerABI.cpp]
-  ignore line: [Linking CXX executable cmTryCompileExec3969374824]
-  ignore line: [/sw/cmake/3.2.3/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3969374824.dir/link.txt --verbose=1]
-  ignore line: [/lrz/sys/compilers/gcc/5.1.0/bin/g++   -std=c++11    -v CMakeFiles/cmTryCompileExec3969374824.dir/CMakeCXXCompilerABI.cpp.o  -o cmTryCompileExec3969374824 -rdynamic  ]
+  ignore line: [Building CXX object CMakeFiles/cmTryCompileExec1260049153.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/lrz/sys/compilers/gcc/5.1.0/bin/g++    -std=c++11    -o CMakeFiles/cmTryCompileExec1260049153.dir/CMakeCXXCompilerABI.cpp.o -c /sw/cmake/3.2.3/share/cmake-3.2/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Linking CXX executable cmTryCompileExec1260049153]
+  ignore line: [/sw/cmake/3.2.3/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1260049153.dir/link.txt --verbose=1]
+  ignore line: [/lrz/sys/compilers/gcc/5.1.0/bin/g++   -std=c++11    -v CMakeFiles/cmTryCompileExec1260049153.dir/CMakeCXXCompilerABI.cpp.o  -o cmTryCompileExec1260049153 -rdynamic  ]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=/lrz/sys/compilers/gcc/5.1.0/bin/g++]
   ignore line: [COLLECT_LTO_WRAPPER=/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/lto-wrapper]
@@ -270,13 +270,13 @@ Parsed CXX implicit link information from above output:
   ignore line: [gcc version 5.1.0 (GCC) ]
   ignore line: [COMPILER_PATH=/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/:/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/]
   ignore line: [LIBRARY_PATH=/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/:/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/:/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-std=c++11' '-v' '-o' 'cmTryCompileExec3969374824' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
-  link line: [ /lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/collect2 -plugin /lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/liblto_plugin.so -plugin-opt=/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ga78ced/ccShyvTB.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTryCompileExec3969374824 /usr/lib/../lib64/crt1.o /usr/lib/../lib64/crti.o /lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/crtbegin.o -L/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0 -L/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc -L/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/../../.. CMakeFiles/cmTryCompileExec3969374824.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/crtend.o /usr/lib/../lib64/crtn.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-std=c++11' '-v' '-o' 'cmTryCompileExec1260049153' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  link line: [ /lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/collect2 -plugin /lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/liblto_plugin.so -plugin-opt=/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ga78ced/ccXDgYSB.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTryCompileExec1260049153 /usr/lib/../lib64/crt1.o /usr/lib/../lib64/crti.o /lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/crtbegin.o -L/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0 -L/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc -L/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/../../.. CMakeFiles/cmTryCompileExec1260049153.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/crtend.o /usr/lib/../lib64/crtn.o]
     arg [/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/collect2] ==> ignore
     arg [-plugin] ==> ignore
     arg [/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/liblto_plugin.so] ==> ignore
     arg [-plugin-opt=/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../libexec/gcc/x86_64-unknown-linux-gnu/5.1.0/lto-wrapper] ==> ignore
-    arg [-plugin-opt=-fresolution=/tmp/ga78ced/ccShyvTB.res] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/ga78ced/ccXDgYSB.res] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lc] ==> ignore
@@ -289,7 +289,7 @@ Parsed CXX implicit link information from above output:
     arg [-dynamic-linker] ==> ignore
     arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTryCompileExec3969374824] ==> ignore
+    arg [cmTryCompileExec1260049153] ==> ignore
     arg [/usr/lib/../lib64/crt1.o] ==> ignore
     arg [/usr/lib/../lib64/crti.o] ==> ignore
     arg [/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/crtbegin.o] ==> ignore
@@ -299,7 +299,7 @@ Parsed CXX implicit link information from above output:
     arg [-L/lib/../lib64] ==> dir [/lib/../lib64]
     arg [-L/usr/lib/../lib64] ==> dir [/usr/lib/../lib64]
     arg [-L/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/../../..] ==> dir [/lrz/mnt/sys.x86_64/compilers/gcc/5.1.0/bin/../lib/gcc/x86_64-unknown-linux-gnu/5.1.0/../../..]
-    arg [CMakeFiles/cmTryCompileExec3969374824.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [CMakeFiles/cmTryCompileExec1260049153.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
     arg [-lstdc++] ==> lib [stdc++]
     arg [-lm] ==> lib [m]
     arg [-lgcc_s] ==> lib [gcc_s]
@@ -329,15 +329,15 @@ Parsed CXX implicit link information from above output:
 Detecting CXX [-std=c++14] compiler features compiled with the following output:
 Change Dir: /home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/gmake" "cmTryCompileExec2288051839/fast"
-/usr/bin/gmake -f CMakeFiles/cmTryCompileExec2288051839.dir/build.make CMakeFiles/cmTryCompileExec2288051839.dir/build
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec851498277/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec851498277.dir/build.make CMakeFiles/cmTryCompileExec851498277.dir/build
 gmake[1]: Entering directory `/home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp'
 /sw/cmake/3.2.3/bin/cmake -E cmake_progress_report /home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec2288051839.dir/feature_tests.cxx.o
-/lrz/sys/compilers/gcc/5.1.0/bin/g++    -std=c++11    -std=c++14 -o CMakeFiles/cmTryCompileExec2288051839.dir/feature_tests.cxx.o -c /home/ga78ced/student_project/CaveProject/build/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTryCompileExec2288051839
-/sw/cmake/3.2.3/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2288051839.dir/link.txt --verbose=1
-/lrz/sys/compilers/gcc/5.1.0/bin/g++   -std=c++11     CMakeFiles/cmTryCompileExec2288051839.dir/feature_tests.cxx.o  -o cmTryCompileExec2288051839 -rdynamic 
+Building CXX object CMakeFiles/cmTryCompileExec851498277.dir/feature_tests.cxx.o
+/lrz/sys/compilers/gcc/5.1.0/bin/g++    -std=c++11    -std=c++14 -o CMakeFiles/cmTryCompileExec851498277.dir/feature_tests.cxx.o -c /home/ga78ced/student_project/CaveProject/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTryCompileExec851498277
+/sw/cmake/3.2.3/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec851498277.dir/link.txt --verbose=1
+/lrz/sys/compilers/gcc/5.1.0/bin/g++   -std=c++11     CMakeFiles/cmTryCompileExec851498277.dir/feature_tests.cxx.o  -o cmTryCompileExec851498277 -rdynamic 
 gmake[1]: Leaving directory `/home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp'
 
 
@@ -403,15 +403,15 @@ gmake[1]: Leaving directory `/home/ga78ced/student_project/CaveProject/build/CMa
 Detecting CXX [-std=c++11] compiler features compiled with the following output:
 Change Dir: /home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/gmake" "cmTryCompileExec3706622420/fast"
-/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3706622420.dir/build.make CMakeFiles/cmTryCompileExec3706622420.dir/build
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec3664098018/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3664098018.dir/build.make CMakeFiles/cmTryCompileExec3664098018.dir/build
 gmake[1]: Entering directory `/home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp'
 /sw/cmake/3.2.3/bin/cmake -E cmake_progress_report /home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec3706622420.dir/feature_tests.cxx.o
-/lrz/sys/compilers/gcc/5.1.0/bin/g++    -std=c++11    -std=c++11 -o CMakeFiles/cmTryCompileExec3706622420.dir/feature_tests.cxx.o -c /home/ga78ced/student_project/CaveProject/build/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTryCompileExec3706622420
-/sw/cmake/3.2.3/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3706622420.dir/link.txt --verbose=1
-/lrz/sys/compilers/gcc/5.1.0/bin/g++   -std=c++11     CMakeFiles/cmTryCompileExec3706622420.dir/feature_tests.cxx.o  -o cmTryCompileExec3706622420 -rdynamic 
+Building CXX object CMakeFiles/cmTryCompileExec3664098018.dir/feature_tests.cxx.o
+/lrz/sys/compilers/gcc/5.1.0/bin/g++    -std=c++11    -std=c++11 -o CMakeFiles/cmTryCompileExec3664098018.dir/feature_tests.cxx.o -c /home/ga78ced/student_project/CaveProject/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTryCompileExec3664098018
+/sw/cmake/3.2.3/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3664098018.dir/link.txt --verbose=1
+/lrz/sys/compilers/gcc/5.1.0/bin/g++   -std=c++11     CMakeFiles/cmTryCompileExec3664098018.dir/feature_tests.cxx.o  -o cmTryCompileExec3664098018 -rdynamic 
 gmake[1]: Leaving directory `/home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp'
 
 
@@ -477,15 +477,15 @@ gmake[1]: Leaving directory `/home/ga78ced/student_project/CaveProject/build/CMa
 Detecting CXX [-std=c++98] compiler features compiled with the following output:
 Change Dir: /home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/gmake" "cmTryCompileExec3943398768/fast"
-/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3943398768.dir/build.make CMakeFiles/cmTryCompileExec3943398768.dir/build
+Run Build Command:"/usr/bin/gmake" "cmTryCompileExec2511376714/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec2511376714.dir/build.make CMakeFiles/cmTryCompileExec2511376714.dir/build
 gmake[1]: Entering directory `/home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp'
 /sw/cmake/3.2.3/bin/cmake -E cmake_progress_report /home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building CXX object CMakeFiles/cmTryCompileExec3943398768.dir/feature_tests.cxx.o
-/lrz/sys/compilers/gcc/5.1.0/bin/g++    -std=c++11    -std=c++98 -o CMakeFiles/cmTryCompileExec3943398768.dir/feature_tests.cxx.o -c /home/ga78ced/student_project/CaveProject/build/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTryCompileExec3943398768
-/sw/cmake/3.2.3/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3943398768.dir/link.txt --verbose=1
-/lrz/sys/compilers/gcc/5.1.0/bin/g++   -std=c++11     CMakeFiles/cmTryCompileExec3943398768.dir/feature_tests.cxx.o  -o cmTryCompileExec3943398768 -rdynamic 
+Building CXX object CMakeFiles/cmTryCompileExec2511376714.dir/feature_tests.cxx.o
+/lrz/sys/compilers/gcc/5.1.0/bin/g++    -std=c++11    -std=c++98 -o CMakeFiles/cmTryCompileExec2511376714.dir/feature_tests.cxx.o -c /home/ga78ced/student_project/CaveProject/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTryCompileExec2511376714
+/sw/cmake/3.2.3/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2511376714.dir/link.txt --verbose=1
+/lrz/sys/compilers/gcc/5.1.0/bin/g++   -std=c++11     CMakeFiles/cmTryCompileExec2511376714.dir/feature_tests.cxx.o  -o cmTryCompileExec2511376714 -rdynamic 
 gmake[1]: Leaving directory `/home/ga78ced/student_project/CaveProject/build/CMakeFiles/CMakeTmp'
 
 

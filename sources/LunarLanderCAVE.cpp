@@ -148,16 +148,16 @@ NodeTransitPtr buildScene()
 
 	// FUEL 1
 	//NodeRecPtr fuel1 = SceneFileHandler::the()->read("models/fuel.3DS");
-	NodeRecPtr fuel1 = makeSphere(8.f,30.f); 
+        NodeRecPtr fuel1 = makeSphere(3.f,30.f);
 
 	// FUEL 2
-	NodeRecPtr fuel2 = makeSphere(8.f,30);
+        NodeRecPtr fuel2 = makeSphere(3.f,30);
 
 	// FUEL 3
-	NodeRecPtr fuel3 = makeSphere(8.f,30);
+        NodeRecPtr fuel3 = makeSphere(3.f,30);
 
 	// FUEL 4
-	NodeRecPtr fuel4 = makeSphere(8.f,30);
+        NodeRecPtr fuel4 = makeSphere(3.f,30);
 	// ----------------------------------------------------------------------------------------------------
 
 	// ------------------------------------- TRANSFORMATION SETUP -----------------------------------------
